@@ -99,7 +99,9 @@ Requirements
 2. Gravity Forms > 1.9.17.8
 3. WP-CLI
 
-= Support =
+
+Support
+-------
 
 If you find any that needs fixing, or if you have any ideas for improvements, please submit a support ticket:
 https://www.gravityhelp.com/request-support/
