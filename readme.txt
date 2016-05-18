@@ -1,8 +1,8 @@
-=== Gravity Forms CLI ===
-Contributors: rocketgenius
+=== Gravity Forms CLI Add-On ===
+Contributors: rocketgenius, stevehenty
 Tags: gravity forms
 Requires at least: 4.2
-Tested up to: 4.5
+Tested up to: 4.5.2
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
