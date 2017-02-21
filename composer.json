@@ -1,0 +1,23 @@
+{
+  "name": "gravityforms/gravityformscli",
+  "description": "A set of WP-CLI commands to manage Gravity Forms.",
+  "type": "wp-cli-package",
+  "homepage": "https://github.com/gravityforms/gravityformscli",
+  "support": {
+    "issues": "https://gravityhelp.com"
+  },
+  "license": "GPLv3",
+  "authors": [
+    {
+      "name": "Rocketgenius",
+      "email": "contact@rocketgenius.com",
+      "homepage": "http://www.gravityforms.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.29"
+  },
+  "autoload": {
+    "files": [ "cli.php" ]
+  }
+}
