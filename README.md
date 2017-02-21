@@ -36,7 +36,7 @@ Commands:
 *  update - Updates a form.
 
 Field Management
----------------
+----------------
 
 wp gf field [command]
 
@@ -51,7 +51,7 @@ Commands:
 *  update - Updates a field.
 
 Entry Management
----------------
+----------------
 
 wp gf entry [command]
 
@@ -68,7 +68,7 @@ Commands:
 *  update - Updates an entry.
 
 Misc Tools
----------------
+----------
 
 wp gf tool [command]
 
