@@ -876,7 +876,7 @@ class GF_CLI_Entry extends WP_CLI_Command {
 	 * @since 1.0-beta-1
 	 * @access private
 	 *
-	 * @param array $form The form object to export entries from
+	 * @param array  $form     The form object to export entries from
 	 * @param string $filename The name of the file to export to
 	 */
 	private function export_entries_csv( $form, $filename ) {
@@ -906,13 +906,30 @@ class GF_CLI_Entry extends WP_CLI_Command {
 			}
 		}
 		$_POST['export_field'] = $fields;
-		// Begin the form export
-		ob_start();
-		GFExport::start_export( $form );
-		$output = ob_get_contents();
-		ob_end_clean();
-		// Place the export content into the file
-		file_put_contents( $filename, $output );
+
+		$export_id = wp_hash( uniqid( 'export', true ) );
+		$export_id = sanitize_key( $export_id );
+
+		$offset = 0;
+
+		$entry_count = GFAPI::count_entries( $form['id'] );
+
+		$progress = WP_CLI\Utils\make_progress_bar( sprintf( 'Exporting %d entries', $entry_count ), $entry_count );
+		do {
+			$status = GFExport::start_export( $form , $offset, $export_id );
+			$offset = $status['offset'];
+			$progress_limit = $offset == 0 ? $entry_count : $offset;
+			for ( $i = 0; $i < $progress_limit; $i++ ) {
+				$progress->tick();
+			}
+		} while ( $status['status'] == 'in_progress' );
+
+		$progress->finish();
+		// Move the file to $filename
+		$export_folder = GFFormsModel::get_upload_root() . 'export/';
+		$source_path          = $export_folder . sanitize_file_name( 'export-' . $export_id . '.csv' );
+		rename( $source_path, $filename );
+
 		// Display the success message
 		WP_CLI::success( 'Entries exported to ' . $filename );
 	}
