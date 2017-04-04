@@ -116,5 +116,9 @@ https://www.gravityhelp.com/request-support/
 
 == ChangeLog ==
 
+= 1.0-beta-2 =
+- Added support for the WP-CLI package index.
+- Fixed entry export.
+
 = 1.0-beta-1 =
 - All new!
