@@ -29,7 +29,7 @@ class GF_CLI_Field extends WP_CLI_Command {
 	 * : The field label. Defaults to 'Untitled'
 	 *
 	 * [--field-json=<field-json>]
-	 * : Allows the values to be defined using JSON rather than the typical options.
+	 * : A JSON string.
 	 *
 	 * ## EXAMPLES
 	 *
