@@ -66,25 +66,96 @@ class GF_CLI_Root extends WP_CLI_Command {
 
 			$network_activate = WP_CLI\Utils\get_flag_value( $assoc_args, 'network-activate', false );
 
-			$install_args = array( 'plugin', 'install', $download_url );
+			$command = sprintf( 'plugin install "%s"', $download_url );
 
 			$install_assoc_args = array();
 
 			if ( $force ) {
 				$install_assoc_args['force'] = true;
+				$command .= ' --force';
 			}
 
 			if ( $activate ) {
 				$install_assoc_args['activate'] = true;
+				$command .= ' --activate';
 			}
 
 			if ( $network_activate ) {
 				$install_assoc_args['network-activate'] = true;
+				$command .= ' --network-activate';
 			}
 
-			WP_CLI::run_command( $install_args, $install_assoc_args );
+			$options = array(
+				'return' => false,
+				'launch' => true,
+				'exit_error' => true,
+			);
+
+			WP_CLI::success( 'command: ' . $command );
+
+
+			WP_CLI::runcommand( $command, $options );
+
+			if ( $activate ) {
+				WP_CLI::runcommand( 'gf setup ' . $slug, $options );
+			}
 		} else {
 			WP_CLI::error( 'There was a problem retrieving the download URL, please check the key.' );
+		}
+	}
+
+	/**
+	 * Runs the setup for Gravity Forms or a Gravity Forms official add-on.
+	 *
+	 *
+	 * @since 1.0
+	 * @access public
+	 *
+	 * [<slug>]
+	 * : The slug of the add-on. Default: gravityforms
+	 *
+	 * [--force]
+	 * : If set, the command will run the setup regardless of whether it has been run before.
+	 *
+	 * ## EXAMPLES
+	 *
+	 *     wp gf setup
+	 *     wp gf setup --force
+	 *     wp gf setup gravityformspolls
+	 *     wp gf setup gravityformspolls --force
+	 *
+	 */
+	public function setup( $args, $assoc_args ) {
+
+		$slug = isset( $args[0] ) ? $args[0] : 'gravityforms';
+
+		$force = WP_CLI\Utils\get_flag_value( $assoc_args, 'force', false );
+
+		if ( $slug == 'gravityforms' ) {
+			$versions = gf_upgrade()->get_versions();
+			if ( empty( $versions['current_version'] ) ) {
+				// First setup
+				gf_upgrade()->maybe_upgrade();
+				WP_CLI::success( 'setup ' . $slug );
+			} else {
+				// Re-running setup
+				if ( $force ) {
+					gf_upgrade()->upgrade( $versions['previous_db_version'], true );
+					WP_CLI::success( 'setup re-run' );
+				} else {
+					WP_CLI::error( 'Use the --force flag to re-run the database setup.' );
+				}
+			}
+		} else {
+			$addon_class_names = GFAddOn::get_registered_addons();
+			foreach ( $addon_class_names as $addon_class_name ) {
+				$addon = call_user_func( array( $addon_class_name, 'get_instance' ) );
+				if ( $addon->get_slug() == $slug ) {
+					$addon->setup();
+					WP_CLI::success( 'setup ' . $slug );
+					break;
+				}
+			}
 		}
 	}
 

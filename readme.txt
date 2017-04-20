@@ -3,7 +3,7 @@ Contributors: rocketgenius, stevehenty
 Tags: gravity forms
 Requires at least: 4.2
 Tested up to: 4.7.2
-Stable tag: 1.0-beta-2
+Stable tag: 1.0-beta-2.1
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -100,7 +100,7 @@ A valid license key is required either in the GF_LICENSE_KEY constant or the --k
 
 1. Wordpress 4.2+
 2. Gravity Forms 1.9.17.8
-3. WP-CLI
+3. WP-CLI version 1.0+
 
 = Support =
 
@@ -115,6 +115,11 @@ https://www.gravityhelp.com/request-support/
 1.  Go to the Plugin management page of WordPress admin section and enable the 'Gravity Forms CLI' plugin
 
 == ChangeLog ==
+
+= 1.0-beta-2.1 =
+- Added the wp gf setup command
+- Fixed an issue with the install command where the database was not setup until visiting the WP dashboard.
+- Updated the WP-CLI requirement to 1.0+
 
 = 1.0-beta-2 =
 - Added support for the WP-CLI package index.
