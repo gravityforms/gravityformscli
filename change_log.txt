@@ -1,5 +1,6 @@
 ---------------------------------------------------------------------
 Version 1.0-beta-3
+    - Added the setup comamand.
     - Fixed an issue with the install command not running the database setup.
 
 ---------------------------------------------------------------------
