@@ -1,4 +1,8 @@
 ---------------------------------------------------------------------
+Version 1.0-beta-3
+    - Fixed an issue with the install command not running the database setup.
+
+---------------------------------------------------------------------
 Version 1.0-beta-2
     - Added support for the WP-CLI package index.
     - Fixed entry export.
