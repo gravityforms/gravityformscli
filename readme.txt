@@ -116,7 +116,7 @@ https://www.gravityhelp.com/request-support/
 
 == ChangeLog ==
 
-= 1.0-beta-2.1 =
+= 1.0-beta-3 =
 - Added the wp gf setup command
 - Fixed an issue with the install command where the database was not setup until visiting the WP dashboard.
 - Updated the WP-CLI requirement to 1.0+
