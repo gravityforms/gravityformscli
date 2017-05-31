@@ -3,7 +3,7 @@
 Plugin Name: Gravity Forms CLI
 Plugin URI: http://www.gravityforms.com
 Description: Manage Gravity Forms with the WP CLI.
-Version: 1.0-beta-3
+Version: 1.0-beta-4
 Author: Rocketgenius
 Author URI: http://www.gravityforms.com
 License: GPL-3.0+
@@ -28,7 +28,7 @@ along with this program.  If not, see http://www.gnu.org/licenses.
 */
 
 // Defines the current version of the CLI add-on
-define( 'GF_CLI_VERSION', '1.0-beta-3' );
+define( 'GF_CLI_VERSION', '1.0-beta-4' );
 
 define( 'GF_CLI_MIN_GF_VERSION', '1.9.17.8' );
 

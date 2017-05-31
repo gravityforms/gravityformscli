@@ -126,6 +126,10 @@ https://www.gravityhelp.com/request-support/
 
 == ChangeLog ==
 
+= 1.0-beta-4 =
+- Updated the install command to pass the --force value to the setup command.
+- Updated the output when forcing the setup.
+
 = 1.0-beta-3 =
 - Added the wp gf setup command
 - Fixed an issue with the install command where the database was not setup until visiting the WP dashboard.

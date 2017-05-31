@@ -97,7 +97,11 @@ class GF_CLI_Root extends WP_CLI_Command {
 			WP_CLI::runcommand( $command, $options );
 
 			if ( $activate ) {
-				WP_CLI::runcommand( 'gf setup ' . $slug, $options );
+				$setup_command = 'gf setup ' . $slug;
+				if ( $force ) {
+					$setup_command .= ' --force';
+				}
+				WP_CLI::runcommand( $setup_command, $options );
 			}
 		} else {
 			WP_CLI::error( 'There was a problem retrieving the download URL, please check the key.' );
@@ -141,9 +145,9 @@ class GF_CLI_Root extends WP_CLI_Command {
 				// Re-running setup
 				if ( $force ) {
 					gf_upgrade()->upgrade( $versions['previous_db_version'], true );
-					WP_CLI::success( 'setup re-run' );
+					WP_CLI::success( 'setup forced' );
 				} else {
-					WP_CLI::error( 'Use the --force flag to re-run the database setup.' );
+					WP_CLI::error( 'Use the --force flag to force the database setup.' );
 				}
 			}
 		} else {

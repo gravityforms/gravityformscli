@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------
+Version 1.0-beta-4
+    - Updated the install command to pass the --force value to the setup command.
+    - Updated the output when forcing the setup.
+
+---------------------------------------------------------------------
 Version 1.0-beta-3
     - Added the setup comamand.
     - Fixed an issue with the install command not running the database setup.
