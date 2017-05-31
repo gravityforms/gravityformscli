@@ -91,9 +91,6 @@ class GF_CLI_Root extends WP_CLI_Command {
 				'exit_error' => true,
 			);
 
-			WP_CLI::success( 'command: ' . $command );
-
-
 			WP_CLI::runcommand( $command, $options );
 
 			if ( $activate ) {
