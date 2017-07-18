@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------
+Version 1.0-beta-5
+    - Added the wp gf form notification command.
+    - Fixed an issue with wp gf form export <form-id> where the form ID is ignored.
+
+---------------------------------------------------------------------
 Version 1.0-beta-4
     - Updated the install command to pass the --force value to the setup command.
     - Updated the output when forcing the setup.
