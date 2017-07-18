@@ -77,6 +77,7 @@ class GF_CLI_Bootstrap {
 			// Adds WP-CLI commands, and maps them to the appropriate class.
 			WP_CLI::add_command( 'gf', 'GF_CLI_Root' );
 			WP_CLI::add_command( 'gf form', 'GF_CLI_Form', $command_args );
+			WP_CLI::add_command( 'gf form notification', 'GF_CLI_Form_Notification', $command_args );
 			WP_CLI::add_command( 'gf field', 'GF_CLI_Field', $command_args );
 			WP_CLI::add_command( 'gf entry', 'GF_CLI_Entry', $command_args );
 			WP_CLI::add_command( 'gf tool', 'GF_CLI_Tool', $command_args );
