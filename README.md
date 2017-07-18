@@ -30,7 +30,7 @@ Commands:
 *  duplicate - Duplicates a form.
 *  edit - Launch system editor to edit the Form configuration.
 *  export - Exports forms to a Gravity Forms Form export file.
-*  form_list - Lists the forms with entry count and view counts.
+*  list - Lists the forms with entry count and view counts.
 *  get - Returns the form JSON.
 *  import - Imports forms from a Gravity Forms Form export file.
 *  update - Updates a form.
