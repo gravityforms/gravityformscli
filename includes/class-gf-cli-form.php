@@ -111,8 +111,8 @@ class GF_CLI_Form extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp gf export 1
-	 *     wp gf export
+	 *     wp gf form export 1
+	 *     wp gf form export
 	 *
 	 * @synopsis [<form-id>] [--dir=<dir>] [--porcelain]
 	 * @alias export
@@ -123,7 +123,7 @@ class GF_CLI_Form extends WP_CLI_Command {
 		require_once( GFCommon::get_base_path() . '/export.php' );
 
 		// If the form ID is passed, use it.  Otherwise, get all form IDs
-		$form_ids = isset( $args['form-id'] ) ? array( $args['form-id'] ) : GFFormsModel::get_form_ids();
+		$form_ids = isset( $args[0] ) ? array( $args[0] ) : GFFormsModel::get_form_ids();
 
 		// Get all form meta for our selected forms
 		$forms = RGFormsModel::get_form_meta_by_id( $form_ids );
@@ -179,7 +179,7 @@ class GF_CLI_Form extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp gf import /path/to/forms.json
+	 *     wp gf form import /path/to/forms.json
 	 *
 	 * @synopsis <path_to_json_file>
 	 * @alias import
@@ -219,7 +219,7 @@ class GF_CLI_Form extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp gf create "My New Form" "The description"
+	 *     wp gf form create "My New Form" "The description"
 	 *
 	 * @synopsis [<title>] [<description>] [--form-json=<form-json>] [--porcelain]
 	 * @subcommand create
@@ -337,7 +337,7 @@ class GF_CLI_Form extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp gf get 1
+	 *     wp gf form get 1
 	 *
 	 * @synopsis <form-id>
 	 * @subcommand get
@@ -373,7 +373,7 @@ class GF_CLI_Form extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp gf delete 1
+	 *     wp gf form delete 1
 	 *
 	 * @synopsis <form-id>... [--force]
 	 */
@@ -427,7 +427,7 @@ class GF_CLI_Form extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp gravityforms duplicate 1
+	 *     wp gf form duplicate 1
 	 *
 	 * @synopsis <form-id> [--porcelain]
 	 * @subcommand duplicate
@@ -475,7 +475,7 @@ class GF_CLI_Form extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp gravityforms update 1 --form-json='{snip}'
+	 *     wp gf form update 1 --form-json='{snip}'
 	 *
 	 * @synopsis <form-id> --form-json=<form-json>
 	 */
