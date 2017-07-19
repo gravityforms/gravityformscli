@@ -115,7 +115,6 @@ class GF_CLI_Form extends WP_CLI_Command {
 	 *     wp gf form export
 	 *
 	 * @synopsis [<form-id>] [--dir=<dir>] [--porcelain]
-	 * @alias export
 	 */
 	function export( $args, $assoc_args ) {
 
