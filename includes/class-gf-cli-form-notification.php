@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Manage Gravity Forms.
+ * Manage Gravity Forms Notifications.
  *
- * @since    1.0
+ * @since    1.0-beta-5
  * @package  GravityForms/CLI
  * @category CLI
  * @author   Rockegenius
- * @copyright Copyright (c) 2016, Rocketgenius
+ * @copyright Copyright (c) 2017, Rocketgenius
  */
 class GF_CLI_Form_Notification extends WP_CLI_Command {
 	/**
@@ -68,13 +68,13 @@ class GF_CLI_Form_Notification extends WP_CLI_Command {
 
 			if ( ! isset( $active_flag ) || ( isset( $active_flag ) && $notification['isActive'] == $active_flag ) ) {
 
-				$active                                     = isset( $notification['isActive'] ) ? $notification['isActive'] : true;
+				$active = isset( $notification['isActive'] ) ? $notification['isActive'] : true;
 
-				$notification['active']                     = $active ? 'yes' : 'no';
+				$notification['active'] = $active ? 'yes' : 'no';
 
-				$notification['event']                      = isset( $notification['event'] ) ? $notification['event'] : '';
+				$notification['event'] = isset( $notification['event'] ) ? $notification['event'] : '';
 
-				$notification_ids[]                         = $notification['id'];
+				$notification_ids[] = $notification['id'];
 
 				$notifications_table[ $notification['id'] ] = $notification;
 
