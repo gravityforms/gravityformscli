@@ -23,8 +23,10 @@ Entry Management
 
 *   wp help gf
 *   wp help gf form
-*   wp help gf field
+*   wp help gf form field
+*   wp help gf form notification
 *   wp help gf entry
+*   wp help gf entry notification
 *   wp help gf tool
 
 = Form Management =
@@ -45,7 +47,8 @@ Commands:
 
 = Field Management =
 
-wp gf field [command]
+* wp gf form field [command]
+* wp gf field [command] (alias)
 
 Commands:
 
@@ -56,6 +59,21 @@ Commands:
 *  get - Returns the JSON representation of a field.
 *  list  - Displays a list of fields for a form.
 *  update - Updates a field.
+
+= Notification Management =
+
+* wp gf form notification [command]
+* wp gf notification [command] (alias)
+
+Commands:
+
+*  create - Creates a new notification.
+*  delete - Deletes a notification.
+*  duplicate - Duplicates a notification.
+*  edit - Launch system editor to edit the notification configuration.
+*  list - Lists the notification.
+*  get - Returns the notification JSON.
+*  update - Updates a notification.
 
 = Entry Management =
 
@@ -72,6 +90,15 @@ Commands:
 *  import - Imports entries.
 *  list - Displays a list of entries.
 *  update - Updates an entry.
+
+= Entry Notifications =
+
+wp gf entry notification [command]
+
+Commands:
+
+*  get - Returns the notifications for the given entry.
+*  send - Sends the notifications for the given entry.
 
 = Misc Tools =
 
@@ -125,6 +152,11 @@ https://www.gravityhelp.com/request-support/
 1.  Go to the Plugin management page of WordPress admin section and enable the 'Gravity Forms CLI' plugin
 
 == ChangeLog ==
+
+= 1.0-beta-5 =
+- Added the wp gf form notification command.
+- Added the wp gf entry notification command.
+- Fixed an issue with wp gf form export <form-id> where the form ID is ignored.
 
 = 1.0-beta-4 =
 - Updated the install command to pass the --force value to the setup command.
