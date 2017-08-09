@@ -110,9 +110,6 @@ class GF_CLI_Root extends WP_CLI_Command {
 			$download_url = isset( $plugin_info['download_url'] ) ? $plugin_info['download_url'] : '';
 		}
 
-		echo $download_url;
-		return;
-
 		if ( $plugin_info && ! empty( $download_url ) ) {
 
 			$download_url = $plugin_info['download_url'];
