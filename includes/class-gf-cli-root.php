@@ -13,6 +13,48 @@
 class GF_CLI_Root extends WP_CLI_Command {
 
 	/**
+	 * Returns the version of Gravity Forms.
+	 *
+	 * @since 1.0-beta-5
+	 * @access public
+	 *
+	 * [<slug>]
+	 * : The slug of the plugin. Default: gravityforms
+	 *
+	 * ## EXAMPLES
+	 *
+	 *     wp gf version
+	 *     wp gf version gravityformspolls
+	 */
+	public function version( $args, $assoc_args ) {
+		$slug = isset( $args[0] ) ? $args[0] : 'gravityforms';
+
+		if ( $slug == 'gravityforms' ) {
+			if ( class_exists( 'GFForms' ) ) {
+				WP_CLI::log( GFForms::$version );
+			} else {
+				WP_CLI::error( 'Gravity Forms is not installed. Use the wp gf install command.' );
+			}
+		} else {
+			$addon_class_names = GFAddOn::get_registered_addons();
+			$addon_found = false;
+			foreach ( $addon_class_names as $addon_class_name ) {
+				/* @var GFAddon $addon */
+				$addon = call_user_func( array( $addon_class_name, 'get_instance' ) );
+				if ( $addon->get_slug() == $slug ) {
+					WP_CLI::log( $addon->get_version() );
+					$addon_found = true;
+					break;
+				}
+			}
+
+			if ( ! $addon_found ) {
+				WP_CLI::error( 'Invalid pluging slug: ' . $slug );
+			}
+		}
+	}
+
+	/**
 	 * Installs Gravity Forms or a Gravity Forms official add-on.
 	 *
 	 * A valid key is required either in the GF_LICENSE_KEY constant or the --key option.
@@ -26,6 +68,9 @@ class GF_CLI_Root extends WP_CLI_Command {
 	 * [--key=<key>]
 	 * : The license key if not already available in the GF_LICENSE_KEY constant.
 	 *
+	 * [--version=<version>]
+	 * : The version to be installed. Accepted values: auto-update, hotfix. Default: auto-update.
+	 *
 	 * [--force]
 	 * : If set, the command will overwrite any installed version of the plugin, without prompting for confirmation.
 	 *
@@ -35,13 +80,14 @@ class GF_CLI_Root extends WP_CLI_Command {
 	 * [--network-activate]
 	 * : If set, the plugin will be network activated immediately after install
 	 *
+	 *
 	 * ## EXAMPLES
 	 *
 	 *     wp gf install
 	 *     wp gf install --force
 	 *     wp gf install --key=[A valid Gravity Forms License Key]
 	 *     wp gf install gravityformspolls key=[1234ABC]
-	 *
+	 * @synopsis [<slug>] [--key=<key>] [--version=<version>] [--force] [--activate] [--network-activate]
 	 */
 	public function install( $args, $assoc_args ) {
 		$slug = isset( $args[0] ) ? $args[0] : 'gravityforms';
@@ -56,7 +102,18 @@ class GF_CLI_Root extends WP_CLI_Command {
 
 		$plugin_info = $this->get_plugin_info( $slug, $key );
 
-		if ( $plugin_info && ! empty( $plugin_info['download_url'] ) ) {
+		$version = isset( $assoc_args['version'] ) ? $assoc_args['version'] : 'auto-update';
+
+		if ( $version == 'hotfix' ) {
+			$download_url = isset( $plugin_info['download_url_latest'] ) ? $plugin_info['download_url_latest'] : '';
+		} else {
+			$download_url = isset( $plugin_info['download_url'] ) ? $plugin_info['download_url'] : '';
+		}
+
+		echo $download_url;
+		return;
+
+		if ( $plugin_info && ! empty( $download_url ) ) {
 
 			$download_url = $plugin_info['download_url'];
 
