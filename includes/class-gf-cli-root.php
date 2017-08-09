@@ -182,6 +182,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 	 *     wp gf setup gravityformspolls
 	 *     wp gf setup gravityformspolls --force
 	 *
+	 * @synopsis [<slug>] [--force]
 	 */
 	public function setup( $args, $assoc_args ) {
 
@@ -217,6 +218,54 @@ class GF_CLI_Root extends WP_CLI_Command {
 		}
 	}
 
+	/**
+	 * Checks for available updates for Gravity Forms or a Gravity Forms official add-on.
+	 *
+	 * A valid key is required either in the GF_LICENSE_KEY constant or the --key option.
+	 *
+	 * @since 1.0-beta-2
+	 * @access public
+	 *
+	 * [<slug>]
+	 * : The slug of the add-on. Default: gravityforms
+	 *
+	 * [--format=<format>]
+	 * : Accepted values: table, csv, json, count. Default: table.
+	 *
+	 * ## EXAMPLES
+	 *
+	 *     wp gf check-update
+	 *     wp gf check-update gravityformspolls
+	 *
+	 * @synopsis [<slug>] [--format=<format>]
+	 * @alias check-update
+	 */
+	public function check_update( $args, $assoc_args ) {
+		$slug = isset( $args[0] ) ? $args[0] : 'gravityforms';
+
+		$plugin_info = $this->get_plugin_info( $slug );
+
+		$versions = array(
+			 array(
+				 'type' => 'auto-update',
+				'version' => $plugin_info['version'],
+			),
+			array(
+				'type' => 'hotfix',
+				'version' => $plugin_info['version_latest'],
+			),
+		);
+
+		$fields = array(
+			'type',
+			'version',
+		);
+
+		$format = isset( $assoc_args['format'] ) ? $assoc_args['format'] : 'table';
+
+		WP_CLI\Utils\format_items( $format, $versions, $fields );
+	}
+
 	private function save_key( $key ) {
 		$current_key = get_option( 'rg_gforms_key' );
 		if ( empty( $key ) ) {
@@ -233,7 +282,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 		return $license_key;
 	}
 
-	private function get_plugin_info( $slug, $key ) {
+	private function get_plugin_info( $slug, $key = '' ) {
 
 		$gravity_manager_url = defined( 'GRAVITY_MANAGER_URL' ) && GRAVITY_MANAGER_URL ? GRAVITY_MANAGER_URL : 'https://www.gravityhelp.com/wp-content/plugins/gravitymanager';
 
