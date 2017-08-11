@@ -69,7 +69,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 	 * : The license key if not already available in the GF_LICENSE_KEY constant.
 	 *
 	 * [--version=<version>]
-	 * : The version to be installed. Accepted values: auto-update, hotfix. Default: auto-update.
+	 * : The version to be installed. Accepted values: auto-update, hotfix. Default: hotfix.
 	 *
 	 * [--force]
 	 * : If set, the command will overwrite any installed version of the plugin, without prompting for confirmation.
@@ -100,9 +100,11 @@ class GF_CLI_Root extends WP_CLI_Command {
 
 		$this->save_key( $key );
 
+		$key = GFCommon::get_key();
+
 		$plugin_info = $this->get_plugin_info( $slug, $key );
 
-		$version = isset( $assoc_args['version'] ) ? $assoc_args['version'] : 'auto-update';
+		$version = isset( $assoc_args['version'] ) ? $assoc_args['version'] : 'hotfix';
 
 		if ( $version == 'hotfix' ) {
 			$download_url = isset( $plugin_info['download_url_latest'] ) ? $plugin_info['download_url_latest'] : '';
@@ -112,7 +114,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 
 		if ( $plugin_info && ! empty( $download_url ) ) {
 
-			$download_url = $plugin_info['download_url'];
+			$download_url .= 'key=' . $key;
 
 			$force = WP_CLI\Utils\get_flag_value( $assoc_args, 'force', false );
 
