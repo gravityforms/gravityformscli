@@ -285,7 +285,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 				// Re-running setup
 				if ( $force ) {
 					gf_upgrade()->upgrade( $versions['previous_db_version'], true );
-					WP_CLI::success( 'setup forced' );
+					WP_CLI::success( 'Database upgraded.' );
 				} else {
 					WP_CLI::error( 'Use the --force flag to force the database setup.' );
 				}
