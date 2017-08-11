@@ -125,12 +125,27 @@ Examples:
 * wp gf install gravityformspolls -key=xxxxx
 * wp gf install gravityformsquiz -key=xxxxx
 
-The database can be set up using the setup command. The command will not re-run the setup unless the --force flag is set.
+Once installed, the database can be set up or upgraded separately using the setup command. The command will not re-run the setup unless the --force flag is set.
 
 Examples:
 
 * wp gf setup
 * wp gf setup --force
+
+Gravity Forms and official add-ons can be updated using the update command.
+
+Examples:
+
+* wp gf update
+* wp gf update gravityformspolls
+
+
+Check the current version using the version command.
+
+Examples:
+
+* wp gf version
+* wp gf version gravityformspolls
 
 
 = Requirements =
@@ -156,6 +171,9 @@ https://www.gravityhelp.com/request-support/
 = 1.0-beta-5 =
 - Added the wp gf form notification command.
 - Added the wp gf entry notification command.
+- Added the wp version command.
+- Added the wp update command.
+- Updated the install and update commands to download the latest hotfix version by default.
 - Fixed an issue with wp gf form export <form-id> where the form ID is ignored.
 
 = 1.0-beta-4 =
