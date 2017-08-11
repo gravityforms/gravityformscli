@@ -106,7 +106,7 @@ wp gf tool [command]
 
 Commands:
 
-*  clear_transients
+*  clear-transients
 *  empty-trash           Delete the trashed entries.
 *  verify-checksums      Verify Gravity Forms files against the checksums.
 
