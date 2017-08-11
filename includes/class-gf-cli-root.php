@@ -162,6 +162,92 @@ class GF_CLI_Root extends WP_CLI_Command {
 	}
 
 	/**
+	 * Updates Gravity Forms or a Gravity Forms official add-on.
+	 *
+	 * A valid key is required either in the Gravity Forms settings, the GF_LICENSE_KEY constant or the --key option.
+	 *
+	 * @since 1.0
+	 * @access public
+	 *
+	 * [<slug>]
+	 * : The slug of the add-on. Default: gravityforms
+	 *
+	 * [--key=<key>]
+	 * : The license key if not already available in the GF_LICENSE_KEY constant.
+	 *
+	 * [--version=<version>]
+	 * : The version to be installed. Accepted values: auto-update, hotfix. Default: hotfix.
+	 *
+	 *
+	 * ## EXAMPLES
+	 *
+	 *     wp gf update
+	 *     wp gf install --key=[A valid Gravity Forms License Key]
+	 *     wp gf install gravityformspolls key=[1234ABC]
+	 * @synopsis [<slug>] [--key=<key>] [--version=<version>]
+	 */
+	public function update( $args, $assoc_args ) {
+
+		if ( ! class_exists( 'GFForms' ) ) {
+			WP_CLI::error( 'Gravity Forms is not active.' );
+		}
+
+		$slug = isset( $args[0] ) ? $args[0] : 'gravityforms';
+
+		$key = isset( $assoc_args['key'] ) ? $assoc_args['key'] : $key = $this->get_key();
+
+		if ( empty( $key ) ) {
+			$key = GFCommon::get_key();
+		} else {
+			$this->save_key( $key );
+			$key = GFCommon::get_key();
+		}
+
+		if ( empty( $key ) ) {
+			WP_CLI::error( 'A valid license key must be saved in the settings or specified in the GF_LICENSE_KEY constant or the --key option.' );
+		}
+
+		$plugin_info = $this->get_plugin_info( $slug, $key );
+
+		$version = isset( $assoc_args['version'] ) ? $assoc_args['version'] : 'hotfix';
+
+		if ( $version == 'hotfix' ) {
+			$available_version = isset( $plugin_info['version_latest'] ) ? $plugin_info['version_latest'] : '';
+			$download_url = isset( $plugin_info['download_url_latest'] ) ? $plugin_info['download_url_latest'] : '';
+		} else {
+			$available_version = isset( $plugin_info['version'] ) ? $plugin_info['version'] : '';
+			$download_url = isset( $plugin_info['download_url'] ) ? $plugin_info['download_url'] : '';
+		}
+
+		if ( version_compare( GFForms::$version, $available_version, '>=' ) ) {
+			WP_CLI::success( 'Plugin already updated' );
+			return;
+		}
+
+		if ( $plugin_info && ! empty( $download_url ) ) {
+
+			$download_url .= '&key=' . $key;
+
+			$command = sprintf( 'plugin install "%s" --force', $download_url );
+
+			$options = array(
+				'return' => false,
+				'launch' => true,
+				'exit_error' => true,
+			);
+
+			WP_CLI::runcommand( $command, $options );
+
+			$setup_command = 'gf setup ' . $slug . ' --force';
+
+			WP_CLI::runcommand( $setup_command, $options );
+
+		} else {
+			WP_CLI::error( 'There was a problem retrieving the download URL, please check the key.' );
+		}
+	}
+
+	/**
 	 * Runs the setup for Gravity Forms or a Gravity Forms official add-on.
 	 *
 	 *
