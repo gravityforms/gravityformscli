@@ -106,12 +106,12 @@ Commands:
 *  empty-trash           Delete the trashed entries.
 *  verify-checksums      Verify Gravity Forms files against the checksums.
 
-Installing Gravity Forms and Add-Ons
-------------------------------------
+Installing and Updating Gravity Forms and Add-Ons
+-------------------------------------------------
 
 The above commands all require Gravity Forms to be installed. However, if Gravity Forms is not installed then you can use this add-on to install it along with all the other official Gravity Forms add-ons.
 
-The install command will download and install the latest version Gravity Forms available for auto-update and then run the database setup.
+The install command will download and install the latest version Gravity Forms and then run the database setup.
 
 A valid license key is required either in the GF_LICENSE_KEY constant or the --key option.
 
@@ -122,12 +122,26 @@ Examples:
 * wp gf install gravityformspolls -key=xxxxx
 * wp gf install gravityformsquiz -key=xxxxx
 
-The database can be set up using the setup command. The command will not re-run the setup unless the --force flag is set.
+Once installed, the database can be set up or upgraded separately using the setup command. The command will not re-run the setup unless the --force flag is set.
 
 Examples:
 
 * wp gf setup
 * wp gf setup --force
+
+Gravity Forms and add-ons can be updated using the update command.
+
+Examples:
+
+* wp gf update
+* wp gf update gravityformspolls
+
+Check the current version using the version command.
+
+Examples:
+
+* wp gf version
+* wp gf version gravityformspolls
 
 
 Requirements
