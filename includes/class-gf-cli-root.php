@@ -100,7 +100,9 @@ class GF_CLI_Root extends WP_CLI_Command {
 
 		$this->save_key( $key );
 
-		$key = GFCommon::get_key();
+		if (class_exists('GFCommon')) {
+			$key = GFCommon::get_key();
+		}
 
 		$plugin_info = $this->get_plugin_info( $slug, $key );
 
