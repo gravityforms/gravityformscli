@@ -100,7 +100,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 
 		$this->save_key( $key );
 
-		$key = GFCommon::get_key();
+		$key = md5( $key );
 
 		$plugin_info = $this->get_plugin_info( $slug, $key );
 
@@ -114,7 +114,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 
 		if ( $plugin_info && ! empty( $download_url ) ) {
 
-			$download_url .= 'key=' . $key;
+			$download_url .= '&key=' . $key;
 
 			$force = WP_CLI\Utils\get_flag_value( $assoc_args, 'force', false );
 
