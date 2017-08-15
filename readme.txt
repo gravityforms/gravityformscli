@@ -168,6 +168,9 @@ https://www.gravityhelp.com/request-support/
 
 == ChangeLog ==
 
+= 1.0-beta-6 =
+- Fixed a fatal error which would occur when using the install command.
+
 = 1.0-beta-5 =
 - Added the wp gf form notification command.
 - Added the wp gf entry notification command.
