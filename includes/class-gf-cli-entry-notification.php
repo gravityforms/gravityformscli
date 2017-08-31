@@ -74,7 +74,7 @@ class GF_CLI_Entry_Notification extends WP_CLI_Command {
 			}
 		}
 
-		$notification_ids_out    = array();
+		$notification_ids_out = array();
 
 		$notifications_table = array();
 
