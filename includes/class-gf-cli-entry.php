@@ -885,7 +885,7 @@ class GF_CLI_Entry extends WP_CLI_Command {
 		require_once( GFCommon::get_base_path() . '/export.php' );
 
 		// Add the default export fields to the form object
-		$form   = GFExport::add_default_export_fields( $form );
+		$form = GFExport::add_default_export_fields( $form );
 		// Create an empty array to add fields to
 		$fields = array();
 		if ( is_array( $form['fields'] ) ) {
@@ -900,7 +900,7 @@ class GF_CLI_Entry extends WP_CLI_Command {
 						$fields[] = $input['id'];
 					}
 					// Add the field ID to the $fields array
-				} else if ( ! $field->displayOnly ) {
+				} elseif ( ! $field->displayOnly ) {
 					$fields[] = $field->id;
 				}
 			}
