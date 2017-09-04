@@ -2,7 +2,7 @@
 Contributors: rocketgenius, stevehenty
 Tags: gravity forms
 Requires at least: 4.2
-Tested up to: 4.7.5
+Tested up to: 4.8.1
 Stable tag: trunk
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -168,8 +168,9 @@ https://www.gravityhelp.com/request-support/
 
 == ChangeLog ==
 
-= 1.0-beta-6 =
-- Fixed a fatal error which would occur when using the install command.
+= 1.0-rc-1 =
+- Added the --file arg to the wp gf form update command to allow forms to be updated from an export file.
+- Fixed a fatal error when using the install command.
 
 = 1.0-beta-5 =
 - Added the wp gf form notification command.
