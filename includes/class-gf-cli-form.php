@@ -78,8 +78,9 @@ class GF_CLI_Form extends WP_CLI_Command {
 		// Run through each of the forms
 		foreach ( $forms_array as &$form ) {
 			// Change the label
-			if ( ! isset( $form['entry_count'] ) )
-			$form['entry_count'] = $form['lead_count'];
+			if ( ! isset( $form['entry_count'] ) ) {
+				$form['entry_count'] = $form['lead_count'];
+			}
 		}
 		// Define each of the columns displayed
 		$fields = array(
