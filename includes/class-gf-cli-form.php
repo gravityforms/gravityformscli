@@ -516,8 +516,28 @@ class GF_CLI_Form extends WP_CLI_Command {
 			$form = $form['0'];
 		}
 
+		$existing_form = GFAPI::get_form( $form );
+
+		if ( ! $existing_form ) {
+			WP_CLI::error( 'Form not found' );
+			return;
+		}
+
+		// Ensure the active flag is set.
+		if ( ! isset( $form['is_active'] ) ) {
+			$form['is_active'] = (bool) rgar( $existing_form, 'is_active' );
+		}
+
 		// Add the form ID to the form object
 		$form['id'] = $form_id;
+
+		// Ensure the confirmations and notifications are associative arrays with the ID as the key.
+		if ( isset( $form['confirmations'] ) ) {
+			$form['confirmations'] = self::set_property_as_key( $form['confirmations'], 'id' );
+		}
+		if ( isset( $form['notifications'] ) ) {
+			$form['notifications'] = self::set_property_as_key( $form['notifications'], 'id' );
+		}
 
 		// Pass the form object to update_form and store the result
 		$result = GFAPI::update_form( $form );
@@ -581,5 +601,14 @@ class GF_CLI_Form extends WP_CLI_Command {
 	protected function _edit( $content, $title ) {
 		$output = \WP_CLI\Utils\launch_editor_for_input( $content, $title );
 		return $output;
+	}
+
+	private static function set_property_as_key( $array, $property ) {
+		$new_array = array();
+		foreach ( $array as $item ) {
+			$new_array[ $item[ $property ] ] = $item;
+		}
+
+		return $new_array;
 	}
 }
