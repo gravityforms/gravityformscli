@@ -168,6 +168,9 @@ https://www.gravityhelp.com/request-support/
 
 == ChangeLog ==
 
+= 1.0-rc-2 =
+- Fixed an issue with updating forms from an update file.
+
 = 1.0-rc-1 =
 - Added the --file arg to the wp gf form update command to allow forms to be updated from an export file.
 - Fixed a fatal error when using the install command.
