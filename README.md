@@ -94,6 +94,16 @@ Commands:
 *  get - Returns the notifications for the given entry.
 *  send - Sends the notifications for the given entry.
 
+License Management
+-------------------
+
+wp gf license [command]
+
+Commands:
+
+*  update - Updates the license key for the installation.
+*  delete - Deletes the license key for the installation.
+
 
 Misc Tools
 ----------

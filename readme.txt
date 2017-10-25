@@ -11,7 +11,7 @@ Manage Gravity Forms on the command line.
 
 == Description ==
 
-The Gravity Forms CLI Add-On allows WP-CLI users to manage forms and entries on the command line.
+The Gravity Forms CLI Add-On allows WP-CLI users to manage forms and entries and more on the command line.
 
 Form Management
 [youtube https://www.youtube.com/watch?v=LO3fLW6SWk0]
@@ -99,6 +99,15 @@ Commands:
 
 *  get - Returns the notifications for the given entry.
 *  send - Sends the notifications for the given entry.
+
+= License Management =
+
+wp gf license [command]
+
+Commands:
+
+*  update - Updates the license key for the installation.
+*  delete - Deletes the license key for the installation.
 
 = Misc Tools =
 
