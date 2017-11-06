@@ -27,6 +27,9 @@ Entry Management
 *   wp help gf form notification
 *   wp help gf entry
 *   wp help gf entry notification
+*   wp help gf install
+*   wp help gf setup
+*   wp help gf license
 *   wp help gf tool
 
 = Form Management =
@@ -177,7 +180,7 @@ https://www.gravityhelp.com/request-support/
 
 == ChangeLog ==
 
-= 1.0-rc-2 =
+= 1.0 =
 - Fixed an issue with updating forms from an update file.
 
 = 1.0-rc-1 =

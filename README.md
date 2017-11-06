@@ -1,7 +1,7 @@
 Gravity Forms CLI Add-On
 ==============================
 
-The Gravity Forms CLI Add-On allows WP-CLI users to manage forms and entries on the command line.
+The Gravity Forms CLI Add-On allows WP-CLI users to manage installation, forms and entries on the command line.
 
 Video demos:
 
@@ -16,6 +16,7 @@ Getting started
 *   wp help gf form
 *   wp help gf field
 *   wp help gf entry
+*   wp gf license
 *   wp help gf tool
 
 Form Management
