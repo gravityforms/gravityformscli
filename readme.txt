@@ -126,7 +126,7 @@ Commands:
 
 The above commands all require Gravity Forms to be installed. However, if Gravity Forms is not installed then you can use this add-on to install it along with all the other official Gravity Forms add-ons.
 
-The install command will download and install the latest version Gravity Forms available for auto-update and then run the database setup.
+The install command will download and install the latest version Gravity Forms available for auto-update and then run the database setup. The license key will be saved in the plugin settings.
 
 A valid license key is required either in the GF_LICENSE_KEY constant or the --key option.
 
