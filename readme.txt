@@ -181,6 +181,7 @@ https://www.gravityhelp.com/request-support/
 == ChangeLog ==
 
 = 1.0 =
+- Added the wp gf license command.
 - Fixed an issue with updating forms from an update file.
 
 = 1.0-rc-1 =
