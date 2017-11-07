@@ -182,7 +182,7 @@ https://www.gravityhelp.com/request-support/
 
 = 1.0 =
 - Added the wp gf license command.
-- Fixed an issue with updating forms from an update file.
+- Fixed an issue with updating forms from an export file.
 
 = 1.0-rc-1 =
 - Added the --file arg to the wp gf form update command to allow forms to be updated from an export file.
