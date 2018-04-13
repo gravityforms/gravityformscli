@@ -583,7 +583,7 @@ class GF_CLI_Entry extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp gf entry list --form-id=1
+	 *     wp gf entry list 1
 	 *
 	 * @synopsis <form-id> [--status=<status>] [--format=<format>] [--page_size=<page_size>] [--offset=<offset>]
 	 * @subcommand list
