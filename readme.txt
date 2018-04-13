@@ -180,6 +180,9 @@ https://www.gravityhelp.com/request-support/
 
 == ChangeLog ==
 
+= 1.0.1 =
+- Fixed the wp gf form update command using the wrong argument to get the existing form which could result in a form not found error.
+
 = 1.0 =
 - Added the wp gf license command.
 - Fixed an issue with updating forms from an export file.
