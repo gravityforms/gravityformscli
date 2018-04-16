@@ -169,7 +169,7 @@ Examples:
 = Support =
 
 If you find any that needs fixing, or if you have any ideas for improvements, please submit a support ticket:
-https://www.gravityhelp.com/request-support/
+https://www.gravityforms.com/open-support-ticket/
 
 
 == Installation ==
