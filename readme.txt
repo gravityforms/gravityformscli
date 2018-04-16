@@ -180,6 +180,9 @@ https://www.gravityforms.com/open-support-ticket/
 
 == ChangeLog ==
 
+= 1.0.2 =
+- Fixed an "invalid synopsis part" warning and an "unknown parameter" error with the wp gf form field update command.
+
 = 1.0.1 =
 - Fixed the wp gf form update command using the wrong argument to get the existing form which could result in a form not found error.
 
