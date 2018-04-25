@@ -180,6 +180,9 @@ https://www.gravityforms.com/open-support-ticket/
 
 == ChangeLog ==
 
+= 1.0.3 =
+- Fixed an issue where old messages could continue to be displayed in the admin following a license key change.
+
 = 1.0.2 =
 - Fixed an "invalid synopsis part" warning and an "unknown parameter" error with the wp gf form field update command.
 
