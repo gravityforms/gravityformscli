@@ -7,7 +7,7 @@
  * @package  GravityForms/CLI
  * @category CLI
  * @author   Rockegenius
- * @copyright Copyright (c) 2017, Rocketgenius
+ * @copyright Copyright (c) 2017-2018, Rocketgenius
  */
 class GF_CLI_Entry_Notification extends WP_CLI_Command {
 

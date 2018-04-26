@@ -6,7 +6,7 @@
  * @package  GravityForms/CLI
  * @category CLI
  * @author   Rockegenius
- * @copyright Copyright (c) 2016, Rocketgenius
+ * @copyright Copyright (c) 2016-2018, Rocketgenius
  */
 class GF_CLI_Tool extends WP_CLI_Command {
 
