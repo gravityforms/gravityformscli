@@ -131,7 +131,7 @@ class GF_CLI_Tool extends WP_CLI_Command {
 	/**
 	 * Outputs the system report from the Forms > System Status page.
 	 *
-	 * @since 1.0.x
+	 * @since 1.0.3
 	 *
 	 * @alias      status
 	 * @subcommand system-report
