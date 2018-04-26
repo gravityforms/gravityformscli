@@ -2,7 +2,7 @@
 Contributors: rocketgenius, stevehenty
 Tags: gravity forms
 Requires at least: 4.2
-Tested up to: 4.8.1
+Tested up to: 4.9.5
 Stable tag: trunk
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -121,6 +121,7 @@ Commands:
 *  clear-transients
 *  empty-trash           Delete the trashed entries.
 *  verify-checksums      Verify Gravity Forms files against the checksums.
+*  system-report         Outputs the system report from the Forms > System Status page. Supports "status" as an alias.
 
 = Installing Gravity Forms and Add-Ons =
 
@@ -181,6 +182,7 @@ https://www.gravityforms.com/open-support-ticket/
 == ChangeLog ==
 
 = 1.0.3 =
+- Added the "wp gf tool system-report" command and the "wp gf tool status" alias for outputting the system report from the Gravity Forms 2.2+ System Status page.
 - Fixed an issue where old messages could continue to be displayed in the admin following a license key change.
 
 = 1.0.2 =

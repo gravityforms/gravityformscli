@@ -116,6 +116,7 @@ Commands:
 *  clear_transients
 *  empty-trash           Delete the trashed entries.
 *  verify-checksums      Verify Gravity Forms files against the checksums.
+*  system-report         Outputs the system report from the Forms > System Status page. Supports "status" as an alias.
 
 Installing and Updating Gravity Forms and Add-Ons
 -------------------------------------------------

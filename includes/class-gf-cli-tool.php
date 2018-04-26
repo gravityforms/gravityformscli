@@ -6,7 +6,7 @@
  * @package  GravityForms/CLI
  * @category CLI
  * @author   Rockegenius
- * @copyright Copyright (c) 2016, Rocketgenius
+ * @copyright Copyright (c) 2016-2018, Rocketgenius
  */
 class GF_CLI_Tool extends WP_CLI_Command {
 
@@ -127,4 +127,24 @@ class GF_CLI_Tool extends WP_CLI_Command {
 
 		return $checksums;
 	}
+
+	/**
+	 * Outputs the system report from the Forms > System Status page.
+	 *
+	 * @since 1.0.3
+	 *
+	 * @alias      status
+	 * @subcommand system-report
+	 */
+	public function system_report() {
+		if ( gf_cli()->is_gravityforms_supported( '2.2' ) ) {
+			require_once( GFCommon::get_base_path() . '/includes/system-status/class-gf-system-report.php' );
+			$sections           = GF_System_Report::get_system_report();
+			$system_report_text = GF_System_Report::get_system_report_text( $sections );
+			WP_CLI::success( $system_report_text );
+		} else {
+			WP_CLI::error( 'The system report is only available with Gravity Forms 2.2 or greater.' );
+		}
+	}
+
 }
