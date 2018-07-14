@@ -7,7 +7,7 @@
  * @package  GravityForms/CLI
  * @category CLI
  * @author   Rockegenius
- * @copyright Copyright (c) 2016, Rocketgenius
+ * @copyright Copyright (c) 2016-2018, Rocketgenius
  */
 class GF_CLI_Form extends WP_CLI_Command {
 	/**
@@ -516,7 +516,7 @@ class GF_CLI_Form extends WP_CLI_Command {
 			$form = $form['0'];
 		}
 
-		$existing_form = GFAPI::get_form( $form );
+		$existing_form = GFAPI::get_form( $form_id );
 
 		if ( ! $existing_form ) {
 			WP_CLI::error( 'Form not found' );
@@ -540,7 +540,7 @@ class GF_CLI_Form extends WP_CLI_Command {
 		}
 
 		// Pass the form object to update_form and store the result
-		$result = GFAPI::update_form( $form );
+		$result = GFAPI::update_form( $form, $form_id );
 		if ( is_wp_error( $result ) ) {
 			// If there was an error, throw an error
 			WP_CLI::error( $result );
