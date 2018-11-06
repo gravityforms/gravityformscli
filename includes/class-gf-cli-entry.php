@@ -508,7 +508,6 @@ class GF_CLI_Entry extends WP_CLI_Command {
 
 		//Set search_criteria
 		$search_criteria['status']        = 'active';
-		// Check if date flag is set
 		// Check to see if start date and end date are set to add to search_criteria
 		if ( isset ( $assoc_args['startdate'] ) ) {
 			$search_criteria['start_date'] = $assoc_args['startdate'];
@@ -939,7 +938,12 @@ class GF_CLI_Entry extends WP_CLI_Command {
 
 		$progress = WP_CLI\Utils\make_progress_bar( sprintf( 'Exporting %d entries', $entry_count ), $entry_count );
 		do {
-			$status = GFExport::start_export( $form , $offset, $export_id, $search_criteria );
+			//If start_date is not set, no criteria is used. For backward compatibility with GravityForms.
+			if( isset( $search_criteria['start_date'] )) {
+				$status = GFExport::start_export( $form , $offset, $export_id, $search_criteria );
+			} else {
+				$status = GFExport::start_export( $form , $offset, $export_id );
+			}
 			$offset = $status['offset'];
 			$progress_limit = $offset == 0 ? $entry_count : $offset;
 			for ( $i = 0; $i < $progress_limit; $i++ ) {
