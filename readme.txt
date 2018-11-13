@@ -2,7 +2,7 @@
 Contributors: rocketgenius, stevehenty
 Tags: gravity forms
 Requires at least: 4.2
-Tested up to: 4.9.5
+Tested up to: 4.9.8
 Stable tag: trunk
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -180,6 +180,10 @@ https://www.gravityforms.com/open-support-ticket/
 1.  Go to the Plugin management page of WordPress admin section and enable the 'Gravity Forms CLI' plugin
 
 == ChangeLog ==
+
+
+= 1.0.4 =
+- Fixed an issue with the "wp gf install" command ending with an error message when no error occurred.
 
 = 1.0.3 =
 - Added the "wp gf tool system-report" command and the "wp gf tool status" alias for outputting the system report from the Gravity Forms 2.2+ System Status page.
