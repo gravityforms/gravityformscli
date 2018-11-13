@@ -289,7 +289,6 @@ class GF_CLI_Form_Field extends WP_CLI_Command {
 				$field['label'] = __( 'Untitled', 'gravityforms' );
 			}
 		} else {
-
 			// Get the property/value for the update data
 			foreach ( $assoc_args as $field_property => $value ) {
 				// If the field property is the form ID, skip it
