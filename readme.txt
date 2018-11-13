@@ -181,19 +181,14 @@ https://www.gravityforms.com/open-support-ticket/
 
 == ChangeLog ==
 
-
-= 1.0.4 =
-- Fixed an issue with the "wp gf install" command ending with an error message when no error occurred.
-
-= 1.0.3 =
+= 1.1 =
+- Added support for start_date and end_date filters for the entry export command. e.g. wp gf entry export 11 --start_date="2018-11-01" --end_date="2018-11-11"
 - Added the "wp gf tool system-report" command and the "wp gf tool status" alias for outputting the system report from the Gravity Forms 2.2+ System Status page.
+- Fixed an issue with the "wp gf install" command ending with an error message when no error occurred.
 - Fixed an issue where old messages could continue to be displayed in the admin following a license key change.
-
-= 1.0.2 =
 - Fixed an "invalid synopsis part" warning and an "unknown parameter" error with the wp gf form field update command.
-
-= 1.0.1 =
 - Fixed the wp gf form update command using the wrong argument to get the existing form which could result in a form not found error.
+- Fixed an issue with the form create command where missing field IDs are added automatically.
 
 = 1.0 =
 - Added the wp gf license command.
