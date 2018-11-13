@@ -247,7 +247,6 @@ class GF_CLI_Form extends WP_CLI_Command {
 			}
 
 			$field_ids = wp_list_pluck( $form['fields'], 'id' );
-			var_dump( $field_ids );
 			$field_ids = array_map( 'absint', $field_ids );
 			$next_field_id = max( $field_ids ) + 1;
 			foreach( $form['fields'] as &$field ) {
