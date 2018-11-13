@@ -896,9 +896,9 @@ class GF_CLI_Entry extends WP_CLI_Command {
 	 * @since 1.0.4 Added the $search_criteria parameter. Current only supports start date and end date.
 	 * @since 1.0-beta-1
 	 *
-	 * @param array $form The form object to export entries from
-	 * @param string $filename The name of the file to export to
-	 * @param array $search_criteria The search criteria
+	 * @param array  $form            The form object to export entries from
+	 * @param string $filename        The name of the file to export to
+	 * @param array  $search_criteria The search criteria
 	 */
 	private function export_entries_csv( $form, $filename, $search_criteria = array() ) {
 
@@ -969,13 +969,13 @@ class GF_CLI_Entry extends WP_CLI_Command {
 	/**
 	 * Exports the form entries as JSON
 	 *
-	 * @since 1.0-beta-1
+	 * @since  1.0-beta-1
 	 * @access private
 	 *
-	 * @param int $form_id The form ID
-	 * @param string $filename The file to export the entries to
-	 * @param array $search_criteria The criteria to search through entries for
-	 * @param array $sorting The entry data to sort by
+	 * @param int    $form_id         The form ID
+	 * @param string $filename        The file to export the entries to
+	 * @param array  $search_criteria The criteria to search through entries for
+	 * @param array  $sorting         The entry data to sort by
 	 */
 	private function export_entries_json( $form_id, $filename, $search_criteria = array(), $sorting = array() ) {
 		// Process 20 entries at a time
