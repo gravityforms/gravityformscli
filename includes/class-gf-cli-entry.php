@@ -438,6 +438,14 @@ class GF_CLI_Entry extends WP_CLI_Command {
 	 * : Acceptable values: csv, json. Default: csv.
 	 * The JSON format contains the raw values and can be imported using the import command.
 	 *
+	 * [--start_date=<date>]
+	 * : Acceptable values: Date format yy-mm-dd. Default: Empty.
+	 * Return only entries submitted on or after the start date.
+	 *
+	 * [--end_date=<date>]
+	 * : Acceptable values: Date format yy-mm-dd. Default: Current system date.
+	 * Return only entries submitted until and including the end date.
+	 *
 	 * [--dir=<dir>]
 	 * : The directory to write the file. Defaults to the current working directory.
 	 *
@@ -449,8 +457,9 @@ class GF_CLI_Entry extends WP_CLI_Command {
 	 *
 	 *     wp gf entry export 1
 	 *     wp gf entry export 1 --format=json
+	 *     wp gf entry export 1 --format=csv --start_date="2018-01-01" --end_date="2018-03-25"
 	 *
-	 * @synopsis <form-id> [<filename>] [--dir=<dir>] [--format=<format>]
+	 * @synopsis <form-id> [<filename>] [--dir=<dir>] [--format=<format>] [--start_date=<yyyy-mm-dd>] [--end_date=<yyyy-mm-dd>]
 	 */
 	public function export( $args, $assoc_args ) {
 		// Check is the form ID was defined.
@@ -497,11 +506,22 @@ class GF_CLI_Entry extends WP_CLI_Command {
 			}
 		}
 
+		$search_criteria = array();
+
+		// Check to see if start date and end date are set to add to search_criteria
+		if ( isset ( $assoc_args['start_date'] ) ) {
+			$search_criteria['start_date'] = $assoc_args['start_date'];
+		}
+
+		if ( isset ( $assoc_args['end_date'] ) ) {
+			$search_criteria['end_date'] = $assoc_args['end_date'];
+		}
+
 		// Export the entries in the defined format
 		if ( $format == 'json' ) {
-			$this->export_entries_json( $form_id, $filename );
+			$this->export_entries_json( $form_id, $filename, $search_criteria );
 		} else {
-			$this->export_entries_csv( $form, $filename );
+			$this->export_entries_csv( $form, $filename, $search_criteria );
 		}
 	}
 
@@ -873,13 +893,14 @@ class GF_CLI_Entry extends WP_CLI_Command {
 	/**
 	 * Exports the form entries as a CSV
 	 *
+	 * @since 1.0.4 Added the $search_criteria parameter. Current only supports start date and end date.
 	 * @since 1.0-beta-1
-	 * @access private
 	 *
-	 * @param array  $form     The form object to export entries from
+	 * @param array $form The form object to export entries from
 	 * @param string $filename The name of the file to export to
+	 * @param array $search_criteria The search criteria
 	 */
-	private function export_entries_csv( $form, $filename ) {
+	private function export_entries_csv( $form, $filename, $search_criteria = array() ) {
 
 		// Require export.php for the GFExport class
 		require_once( GFCommon::get_base_path() . '/export.php' );
@@ -905,14 +926,25 @@ class GF_CLI_Entry extends WP_CLI_Command {
 				}
 			}
 		}
+
 		$_POST['export_field'] = $fields;
+
+		$search_criteria['status'] = 'status';
+
+		if ( isset( $search_criteria['start_date'] ) ) {
+			$_POST['export_date_start'] = $search_criteria['start_date'];
+		}
+
+		if ( isset( $search_criteria['end_date'] ) ) {
+			$_POST['export_date_end'] = $search_criteria['end_date'];
+		}
 
 		$export_id = wp_hash( uniqid( 'export', true ) );
 		$export_id = sanitize_key( $export_id );
 
 		$offset = 0;
 
-		$entry_count = GFAPI::count_entries( $form['id'] );
+		$entry_count = GFAPI::count_entries( $form['id'], $search_criteria );
 
 		$progress = WP_CLI\Utils\make_progress_bar( sprintf( 'Exporting %d entries', $entry_count ), $entry_count );
 		do {
@@ -952,7 +984,7 @@ class GF_CLI_Entry extends WP_CLI_Command {
 		$offset    = 0;
 
 		// Get the number of entries
-		$entry_count  = GFAPI::count_entries( $form_id );
+		$entry_count  = GFAPI::count_entries( $form_id, $search_criteria );
 		// Create the progress bar
 		$progress     = WP_CLI\Utils\make_progress_bar( 'Exporting entries', (int) $entry_count / $page_size );
 		// Set the number of remaining entries
