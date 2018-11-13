@@ -228,7 +228,7 @@ class GF_CLI_Form_Field extends WP_CLI_Command {
 	 * <field-id>
 	 * : The field ID
 	 *
-	 * [--<property>=<value>]
+	 * [--<field>=<value>]
 	 * : The field properties to update
 	 *
 	 * [--field-json=<field-json>]
@@ -238,7 +238,7 @@ class GF_CLI_Form_Field extends WP_CLI_Command {
 	 *
 	 *     wp gf update 1 2 --type='text' --label='My Field'
 	 *
-	 * @synopsis <form-id> <field-id> [--<property>=<value>] [--field-json=<field-json>]
+	 * @synopsis <form-id> <field-id> [--<field>=<value>] [--field-json=<field-json>]
 	 */
 	public function update( $args, $assoc_args ) {
 
@@ -289,6 +289,7 @@ class GF_CLI_Form_Field extends WP_CLI_Command {
 				$field['label'] = __( 'Untitled', 'gravityforms' );
 			}
 		} else {
+
 			// Get the property/value for the update data
 			foreach ( $assoc_args as $field_property => $value ) {
 				// If the field property is the form ID, skip it
