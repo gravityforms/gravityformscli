@@ -241,6 +241,20 @@ class GF_CLI_Form extends WP_CLI_Command {
 			if ( isset( $args[1] ) ) {
 				$form['description'] = $args[1];
 			}
+
+			if ( ! isset( $form['fields'] ) ) {
+				$form['fields'] = array();
+			}
+
+			$field_ids = wp_list_pluck( $form['fields'], 'id' );
+			$field_ids = array_map( 'absint', $field_ids );
+			$next_field_id = max( $field_ids ) + 1;
+			foreach( $form['fields'] as &$field ) {
+				if ( ! isset( $field['id'] ) ) {
+					$field['id'] = $next_field_id++;
+				}
+			}
+
 		} else {
 			// Set the title based on the passed argument
 			$title       = $args[0];
