@@ -2,10 +2,10 @@
 Contributors: rocketgenius, stevehenty
 Tags: gravity forms
 Requires at least: 4.2
-Tested up to: 4.9.8
+Tested up to: 5.2.2
 Stable tag: trunk
-License: GPL-3.0+
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
+License: GPL-2.0+
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Manage Gravity Forms on the command line.
 
