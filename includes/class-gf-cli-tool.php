@@ -1,4 +1,7 @@
 <?php
+
+defined( 'ABSPATH' ) || die();
+
 /**
  * Misc Gravity Forms Tools.
  *

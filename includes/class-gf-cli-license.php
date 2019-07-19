@@ -1,5 +1,7 @@
 <?php
 
+defined( 'ABSPATH' ) || die();
+
 /**
  * Manage the Gravity Forms License Key.
  *

@@ -1,5 +1,7 @@
 <?php
 
+defined( 'ABSPATH' ) || die();
+
 // Include the Gravity Forms add-on framework
 GFForms::include_addon_framework();
 
