@@ -128,7 +128,7 @@ class GF_CLI_Entry extends WP_CLI_Command {
 	 *     wp gf entry delete 1
 	 *     wp gf entry delete 1 3 7 10
 	 *     wp gf entry delete 1 --force
-	 *     wp gf entry delete $(wp gf entry list 1 --status=trash --format=ids )
+	 *     wp gf entry delete $(wp gf entry list 1 --status=trash --format=ids ) --force
 	 *
 	 * @synopsis <entry-id>... [--force]
 	 */
