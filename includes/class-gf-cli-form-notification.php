@@ -422,7 +422,7 @@ class GF_CLI_Form_Notification extends WP_CLI_Command {
 
 		$found = false;
 		foreach ( $notifications as $key => $notification ) {
-			if ( $notification['id'] == $notification_id ) {
+			if ( $notification['id'] == $notification_id || $notifications['id'] == $new_notification['id'] ) {
 				$notifications[ $key ] = $new_notification;
 				$found = true;
 				break;
