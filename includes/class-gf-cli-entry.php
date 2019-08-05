@@ -451,10 +451,6 @@ class GF_CLI_Entry extends WP_CLI_Command {
 	 * [--dir=<dir>]
 	 * : The directory to write the file. Defaults to the current working directory.
 	 *
-	 * [--status=<status>]
-	 * : The status of the entries. Default: active
-	 * Accepted values: trash, active
-	 *
 	 * Examples
 	 *      --filename=entries.json
 	 *      --filename=entries.csv
@@ -465,7 +461,7 @@ class GF_CLI_Entry extends WP_CLI_Command {
 	 *     wp gf entry export 1 --format=json
 	 *     wp gf entry export 1 --format=csv --start_date="2018-01-01" --end_date="2018-03-25"
 	 *
-	 * @synopsis <form-id> [<filename>] [--dir=<dir>] [--format=<format>] [--start_date=<yyyy-mm-dd>] [--end_date=<yyyy-mm-dd>] [--status=<status>]
+	 * @synopsis <form-id> [<filename>] [--dir=<dir>] [--format=<format>] [--start_date=<yyyy-mm-dd>] [--end_date=<yyyy-mm-dd>]
 	 */
 	public function export( $args, $assoc_args ) {
 		// Check is the form ID was defined.
@@ -512,14 +508,7 @@ class GF_CLI_Entry extends WP_CLI_Command {
 			}
 		}
 
-		// Default entry status to active if no status flag is set.
-		if ( ! isset( $assoc_args['status'] ) ) {
-			$assoc_args['status'] = 'active';
-		}
-
 		$search_criteria = array();
-
-		$search_criteria['status'] = $assoc_args['status'];
 
 		// Check to see if start date and end date are set to add to search_criteria
 		if ( isset ( $assoc_args['start_date'] ) ) {
@@ -941,6 +930,8 @@ class GF_CLI_Entry extends WP_CLI_Command {
 		}
 
 		$_POST['export_field'] = $fields;
+
+		$search_criteria['status'] = 'status';
 
 		if ( isset( $search_criteria['start_date'] ) ) {
 			$_POST['export_date_start'] = $search_criteria['start_date'];
