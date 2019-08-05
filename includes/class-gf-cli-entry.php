@@ -931,7 +931,7 @@ class GF_CLI_Entry extends WP_CLI_Command {
 
 		$_POST['export_field'] = $fields;
 
-		$search_criteria['status'] = 'status';
+		$search_criteria['status'] = 'active';
 
 		if ( isset( $search_criteria['start_date'] ) ) {
 			$_POST['export_date_start'] = $search_criteria['start_date'];
