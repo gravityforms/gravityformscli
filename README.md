@@ -167,6 +167,6 @@ Requirements
 Support
 -------
 
-If you find any that needs fixing, or if you have any ideas for improvements, please submit a support ticket:
+If you find anything that needs fixing, or if you have any ideas for improvements, please open a support ticket:
 https://www.gravityforms.com/open-support-ticket/
 
