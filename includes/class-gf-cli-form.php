@@ -1,7 +1,5 @@
 <?php
 
-defined( 'ABSPATH' ) || die();
-
 /**
  * Manage Gravity Forms.
  *
@@ -113,12 +111,15 @@ class GF_CLI_Form extends WP_CLI_Command {
 	 * [--porcelain]
 	 * : Overrides the standard success message with just the export file path
 	 *
+	 * [--filename=<filename>]
+	 * : The filename for the form to export. Defaults to the current date.
+	 *
 	 * ## EXAMPLES
 	 *
 	 *     wp gf form export 1
 	 *     wp gf form export
 	 *
-	 * @synopsis [<form-id>] [--dir=<dir>] [--porcelain]
+	 * @synopsis [<form-id>] [--dir=<dir>] [--porcelain] [--filename=<filename>]
 	 */
 	function export( $args, $assoc_args ) {
 
@@ -138,7 +139,11 @@ class GF_CLI_Form extends WP_CLI_Command {
 		$forms_json = json_encode( $forms );
 
 		// Set the filename of the export
-		$filename = 'gravityforms-export-' . date( 'Y-m-d' ) . '.json';
+		if ( isset( $assoc_args['filename'] ) ) {
+			$filename = $assoc_args['filename'];
+		} else {
+			$filename = 'gravityforms-export-' . date( 'Y-m-d' ) . '.json';
+		}
 
 		// If the export directory is set
 		if ( isset( $assoc_args['dir'] ) ) {
