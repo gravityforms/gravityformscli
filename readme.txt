@@ -181,6 +181,12 @@ https://www.gravityforms.com/open-support-ticket/
 
 == ChangeLog ==
 
+= 1.1.2 =
+- Updated the ids format of the entry list command to support the page-size and offset args. Credit: Ulrich Pogson.
+
+= 1.1.1 =
+- Fixed an issue with the entry export command.
+
 = 1.1 =
 - Added support for start_date and end_date filters for the entry export command. e.g. wp gf entry export 11 --start_date="2018-11-01" --end_date="2018-11-11"
 - Added the "wp gf tool system-report" command and the "wp gf tool status" alias for outputting the system report from the Gravity Forms 2.2+ System Status page.
