@@ -147,6 +147,8 @@ class GF_CLI_Form extends WP_CLI_Command {
 			$filename = 'gravityforms-export-' . date( 'Y-m-d' ) . '.json';
 		}
 
+		$filename = sanitize_file_name( $filename );
+
 		// If the export directory is set
 		if ( isset( $assoc_args['dir'] ) ) {
 			// If the directory isn't writable, throw an error
