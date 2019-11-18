@@ -391,34 +391,47 @@ class GF_CLI_Form_Notification extends WP_CLI_Command {
 	 * <form-id>
 	 * : The Form ID
 	 *
+	 * [<notification-id>]
+	 * : The ID of the notification to updated.
+	 *
 	 * --notification-json=<notification-json>
-	 * : The JSON representation of the form
+	 * : The JSON representation of the notification.
 	 *
 	 * ## EXAMPLES
 	 *
 	 *     wp gf form notification update 1 --notification-json='{snip}'
+	 *     wp gf form notification update 1 abc1 --notification-json='{snip}'
 	 *
-	 * @synopsis <form-id> --notification-json=<notification-json>
+	 * @synopsis <form-id> [<notification-id>] --notification-json=<notification-json>
 	 */
 	function update( $args, $assoc_args ) {
 		$form_id = $args[0];
+		$form    = GFAPI::get_form( $form_id );
 
-		$notification_id = $args[1];
-
-		$form = GFAPI::get_form( $form_id );
 		if ( empty( $form ) ) {
 			WP_CLI::error( 'Form not found' );
 		}
 
-		$notifications = $form['notifications'];
-
-		$json_config = $assoc_args['notification-json'];
-
+		$json_config      = $assoc_args['notification-json'];
 		$new_notification = json_decode( $json_config, ARRAY_A );
 
 		if ( empty( $new_notification ) ) {
 			WP_CLI::error( 'Notification not valid' );
 		}
+
+		$notification_id = rgar( $args, 1 );
+
+		if ( empty( $notification_id ) ) {
+			if ( empty( $new_notification['id'] ) ) {
+				WP_CLI::error( 'Please specify the ID of the notification to be updated' );
+			} else {
+				$notification_id = $new_notification['id'];
+			}
+		} else {
+			$new_notification['id'] = $notification_id;
+		}
+
+		$notifications = $form['notifications'];
 
 		$found = false;
 		foreach ( $notifications as $key => $notification ) {
