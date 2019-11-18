@@ -101,6 +101,7 @@ class GF_CLI_Form extends WP_CLI_Command {
 	 * Exports forms to a Gravity Forms Form export file.
 	 *
 	 * @since 1.0-beta-1
+	 * @since 1.2 Added the optional filename arg.
 	 *
 	 * ## OPTIONS
 	 *
@@ -110,18 +111,18 @@ class GF_CLI_Form extends WP_CLI_Command {
 	 * [--dir=<dir>]
 	 * : The directory for the form to export. Defaults to the current working directory.
 	 *
-	 * [--porcelain]
-	 * : Overrides the standard success message with just the export file path
-	 *
 	 * [--filename=<filename>]
 	 * : The filename for the form to export. Defaults to the current date.
+	 *
+	 * [--porcelain]
+	 * : Overrides the standard success message with just the export file path
 	 *
 	 * ## EXAMPLES
 	 *
 	 *     wp gf form export 1
 	 *     wp gf form export
 	 *
-	 * @synopsis [<form-id>] [--dir=<dir>] [--porcelain] [--filename=<filename>]
+	 * @synopsis [<form-id>] [--dir=<dir>] [--filename=<filename>] [--porcelain]
 	 */
 	function export( $args, $assoc_args ) {
 
