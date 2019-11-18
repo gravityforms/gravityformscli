@@ -183,6 +183,7 @@ https://www.gravityforms.com/open-support-ticket/
 
 = 1.1.2 =
 - Updated the ids format of the entry list command to support the page-size and offset args. Credit: Ulrich Pogson.
+- Updated the form export command to support the optional filename arg e.g. wp gf form export 1 --filename=testing.json. Credit: Timothy Decker.
 
 = 1.1.1 =
 - Fixed an issue with the entry export command.
