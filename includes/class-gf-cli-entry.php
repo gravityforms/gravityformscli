@@ -643,7 +643,7 @@ class GF_CLI_Entry extends WP_CLI_Command {
 
 		// If the fomate is set to 'ids', get the entry IDs
 		if ( $format == 'ids' ) {
-			$entry_ids = GFFormsModel::search_lead_ids( $form_id, $search_criteria );
+			$entry_ids = GFAPI::get_entry_ids( $form_id, $search_criteria, array(), $paging, $total_count );
 			echo implode( ' ', $entry_ids );
 
 			return;
