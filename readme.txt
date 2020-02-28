@@ -181,6 +181,9 @@ https://www.gravityforms.com/open-support-ticket/
 
 == ChangeLog ==
 
+= 1.1.3 =
+- Fixed an issue where the install command could not network activate plugins.
+
 = 1.1.2 =
 - Updated the ids format of the entry list command to support the page-size and offset args. Credit: Ulrich Pogson.
 - Updated the form export command to support the optional filename arg e.g. wp gf form export 1 --filename=testing.json. Credit: Timothy Decker.
