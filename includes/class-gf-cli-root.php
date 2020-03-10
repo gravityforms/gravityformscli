@@ -364,7 +364,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 
 	private function get_plugin_info( $slug, $key = '' ) {
 
-		$gravity_manager_url = defined( 'GRAVITY_MANAGER_URL' ) && GRAVITY_MANAGER_URL ? GRAVITY_MANAGER_URL : 'https://www.gravityapi.com/wp-content/plugins/gravitymanager';
+		$gravity_manager_url = defined( 'GRAVITY_MANAGER_URL' ) && GRAVITY_MANAGER_URL ? GRAVITY_MANAGER_URL : 'https://gravityapi.com/wp-content/plugins/gravitymanager';
 
 		$url      = $gravity_manager_url . "/api.php?op=get_plugin&slug={$slug}&key={$key}";
 		$options  = array(
