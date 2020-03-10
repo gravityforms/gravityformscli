@@ -79,7 +79,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 	 * [--activate]
 	 * : If set, the plugin will be activated immediately after install.
 	 *
-	 * [--network-activate]
+	 * [--activate-network]
 	 * : If set, the plugin will be network activated immediately after install
 	 *
 	 *
@@ -89,7 +89,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 	 *     wp gf install --force
 	 *     wp gf install --key=[A valid Gravity Forms License Key]
 	 *     wp gf install gravityformspolls key=[1234ABC]
-	 * @synopsis [<slug>] [--key=<key>] [--version=<version>] [--force] [--activate] [--network-activate]
+	 * @synopsis [<slug>] [--key=<key>] [--version=<version>] [--force] [--activate] [--activate-network]
 	 */
 	public function install( $args, $assoc_args ) {
 		$slug = isset( $args[0] ) ? $args[0] : 'gravityforms';
@@ -122,7 +122,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 
 			$activate = WP_CLI\Utils\get_flag_value( $assoc_args, 'activate', false );
 
-			$network_activate = WP_CLI\Utils\get_flag_value( $assoc_args, 'network-activate', false );
+			$activate_network = WP_CLI\Utils\get_flag_value( $assoc_args, 'activate-network', false );
 
 			$command = sprintf( 'plugin install "%s"', $download_url );
 
@@ -138,9 +138,9 @@ class GF_CLI_Root extends WP_CLI_Command {
 				$command .= ' --activate';
 			}
 
-			if ( $network_activate ) {
-				$install_assoc_args['network-activate'] = true;
-				$command .= ' --network-activate';
+			if ( $activate_network ) {
+				$install_assoc_args['activate-network'] = true;
+				$command .= ' --activate-network';
 			}
 
 			$options = array(

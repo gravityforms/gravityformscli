@@ -101,6 +101,7 @@ class GF_CLI_Form extends WP_CLI_Command {
 	 * Exports forms to a Gravity Forms Form export file.
 	 *
 	 * @since 1.0-beta-1
+	 * @since 1.2 Added the optional filename arg.
 	 *
 	 * ## OPTIONS
 	 *
@@ -110,6 +111,9 @@ class GF_CLI_Form extends WP_CLI_Command {
 	 * [--dir=<dir>]
 	 * : The directory for the form to export. Defaults to the current working directory.
 	 *
+	 * [--filename=<filename>]
+	 * : The filename for the form to export. Defaults to the current date.
+	 *
 	 * [--porcelain]
 	 * : Overrides the standard success message with just the export file path
 	 *
@@ -118,7 +122,7 @@ class GF_CLI_Form extends WP_CLI_Command {
 	 *     wp gf form export 1
 	 *     wp gf form export
 	 *
-	 * @synopsis [<form-id>] [--dir=<dir>] [--porcelain]
+	 * @synopsis [<form-id>] [--dir=<dir>] [--filename=<filename>] [--porcelain]
 	 */
 	function export( $args, $assoc_args ) {
 
@@ -138,7 +142,13 @@ class GF_CLI_Form extends WP_CLI_Command {
 		$forms_json = json_encode( $forms );
 
 		// Set the filename of the export
-		$filename = 'gravityforms-export-' . date( 'Y-m-d' ) . '.json';
+		if ( isset( $assoc_args['filename'] ) ) {
+			$filename = $assoc_args['filename'];
+		} else {
+			$filename = 'gravityforms-export-' . date( 'Y-m-d' ) . '.json';
+		}
+
+		$filename = sanitize_file_name( $filename );
 
 		// If the export directory is set
 		if ( isset( $assoc_args['dir'] ) ) {

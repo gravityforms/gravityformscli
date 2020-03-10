@@ -125,10 +125,10 @@ class GF_CLI_Entry extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp gf delete 1
-	 *     wp gf delete 1 3 7 10
-	 *     wp gf delete 1 --force
-	 *     wp gf delete $(wp gf entry list 1 --status=trash --format=ids )
+	 *     wp gf entry delete 1
+	 *     wp gf entry delete 1 3 7 10
+	 *     wp gf entry delete 1 --force
+	 *     wp gf entry delete $(wp gf entry list 1 --status=trash --format=ids ) --force
 	 *
 	 * @synopsis <entry-id>... [--force]
 	 */
@@ -198,7 +198,7 @@ class GF_CLI_Entry extends WP_CLI_Command {
 	 * ## EXAMPLES
 	 *
 	 *     wp gf entry create 1 --field_1=ABC --field_2=test@test.com --field_3=1234 --field_4=Hello --field_5.3=John --field_5.6=Doe
-	 *     wp gf entry create $(wp entry get 3 --raw --format=json)
+	 *     wp gf entry create $(wp gf entry get 3 --raw --format=json)
 	 * @synopsis [<entry-json>] [<form-id>] [--<field>=<value>]
 	 */
 	public function create( $args, $assoc_args ) {
@@ -643,7 +643,7 @@ class GF_CLI_Entry extends WP_CLI_Command {
 
 		// If the fomate is set to 'ids', get the entry IDs
 		if ( $format == 'ids' ) {
-			$entry_ids = GFFormsModel::search_lead_ids( $form_id, $search_criteria );
+			$entry_ids = GFAPI::get_entry_ids( $form_id, $search_criteria, array(), $paging, $total_count );
 			echo implode( ' ', $entry_ids );
 
 			return;
