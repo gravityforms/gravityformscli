@@ -181,6 +181,9 @@ https://www.gravityforms.com/open-support-ticket/
 
 == ChangeLog ==
 
+= 1.1.4 =
+- Updated Gravity API domain.
+
 = 1.1.3 =
 - Fixed an issue where the install command could not network activate plugins.
 
