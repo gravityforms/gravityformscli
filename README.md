@@ -3,6 +3,8 @@ Gravity Forms CLI Add-On
 
 The Gravity Forms CLI Add-On allows WP-CLI users to manage installation, forms and entries on the command line.
 
+[Documentation](https://docs.gravityforms.com/category/add-ons-gravity-forms/wp-cli-add-on/)
+
 Video demos:
 
 [Form Management](https://www.youtube.com/watch?v=LO3fLW6SWk0])
@@ -12,17 +14,17 @@ Video demos:
 Getting started
 ---------------
 
-*   wp help gf
-*   wp help gf form
-*   wp help gf field
-*   wp help gf entry
-*   wp gf license
-*   wp help gf tool
+*   `wp help gf`
+*   `wp help gf form`
+*   `wp help gf field`
+*   `wp help gf entry`
+*   `wp gf license`
+*   `wp help gf tool`
 
 Form Management
 ---------------
 
-wp gf form [command]
+`wp gf form [command]`
 
 Commands:
 
@@ -39,8 +41,8 @@ Commands:
 Field Management
 ----------------
 
-* wp gf form field [command]
-* wp gf field [command] (alias)
+* `wp gf form field [command]`
+* `wp gf field [command]` (alias)
 
 Commands:
 
@@ -55,8 +57,8 @@ Commands:
 Notification Management
 -----------------------
 
-* wp gf form notification [command]
-* wp gf notification [command] (alias)
+* `wp gf form notification [command]`
+* `wp gf notification [command]` (alias)
 
 Commands:
 
@@ -71,7 +73,7 @@ Commands:
 Entry Management
 ----------------
 
-wp gf entry [command]
+`wp gf entry [command]`
 
 Commands:
 
@@ -88,7 +90,7 @@ Commands:
 Entry Notifications
 -------------------
 
-wp gf entry notification [command]
+`wp gf entry notification [command]`
 
 Commands:
 
@@ -98,7 +100,7 @@ Commands:
 License Management
 -------------------
 
-wp gf license [command]
+`wp gf license [command]`
 
 Commands:
 
@@ -109,7 +111,7 @@ Commands:
 Misc Tools
 ----------
 
-wp gf tool [command]
+`wp gf tool [command]`
 
 Commands:
 
@@ -125,35 +127,35 @@ The above commands all require Gravity Forms to be installed. However, if Gravit
 
 The install command will download and install the latest version Gravity Forms and then run the database setup. The license key will be saved in the plugin settings.
 
-A valid license key is required either in the GF_LICENSE_KEY constant or the --key option.
+A valid license key is required either in the `GF_LICENSE_KEY` constant or the `--key` option.
 
 Examples:
 
-* wp gf install -key=xxxxx
-* wp gf install -key=xxxxx --activate
-* wp gf install gravityformspolls -key=xxxxx
-* wp gf install gravityformsquiz -key=xxxxx
+* `wp gf install --key=xxxxx`
+* `wp gf install --key=xxxxx --activate`
+* `wp gf install gravityformspolls --key=xxxxx`
+* `wp gf install gravityformsquiz --key=xxxxx`
 
-Once installed, the database can be set up or upgraded separately using the setup command. The command will not re-run the setup unless the --force flag is set.
+Once installed, the database can be set up or upgraded separately using the setup command. The command will not re-run the setup unless the `--force` flag is set.
 
 Examples:
 
-* wp gf setup
-* wp gf setup --force
+* `wp gf setup`
+* `wp gf setup --force`
 
 Gravity Forms and add-ons can be updated using the update command.
 
 Examples:
 
-* wp gf update
-* wp gf update gravityformspolls
+* `wp gf update`
+* `wp gf update gravityformspolls`
 
 Check the current version using the version command.
 
 Examples:
 
-* wp gf version
-* wp gf version gravityformspolls
+* `wp gf version`
+* `wp gf version gravityformspolls`
 
 
 Requirements
@@ -167,6 +169,6 @@ Requirements
 Support
 -------
 
-If you find anything that needs fixing, or if you have any ideas for improvements, please open a support ticket:
-https://www.gravityforms.com/open-support-ticket/
+If you find anything that needs fixing please open a support ticket at https://www.gravityforms.com/open-support-ticket/
 
+If you have any ideas for improvements please submit your idea at https://www.gravityforms.com/gravity-forms-roadmap/
