@@ -125,13 +125,13 @@ class GF_CLI_Form_Notification extends WP_CLI_Command {
 	 * [<name>]
 	 * : The name of the notification.
 	 *
-	 * <--to=<to>->
+	 * [--to=<to>]
 	 * : The to field. Default: {admin_email}
 	 *
-	 * <--subject=<subject>>
+	 * [--subject=<subject>]
 	 * : The subject field. Default: New submission from {form_title}
 	 *
-	 * <--message=<message>>
+	 * [--message=<message>]
 	 * : The message body. Default: {all_fields}
 	 *
 	 * [--to-type=<to-type>]
