@@ -151,7 +151,7 @@ class GF_CLI_Form_Notification extends WP_CLI_Command {
 	 *     wp gf form notification create 1 "My Notification"
 	 *     wp gf form notification create 1 "My Notification" --to="admin@mysite.com"
 	 *
-	 * @synopsis [<title>] [<description>] [--form-json=<form-json>] [--porcelain]
+	 * @synopsis <form-id> [<name>] [--to=<to>] [--subject=<subject>] [--message=<message>] [--to-type=<to-type>] [--event=<event>] [--notification-json=<notification-json>] [--porcelain]
 	 */
 	function create( $args, $assoc_args ) {
 
