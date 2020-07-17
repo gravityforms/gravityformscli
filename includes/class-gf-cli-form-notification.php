@@ -172,7 +172,7 @@ class GF_CLI_Form_Notification extends WP_CLI_Command {
 			$notification = json_decode( $notification_json, ARRAY_A );
 			// Check if the name had been set and override the JSON setting
 			if ( isset( $args[1] ) ) {
-				$notification['name'] = $args[0];
+				$notification['name'] = $args[1];
 			}
 
 			if ( ! isset( $notification['id'] ) || ( isset( $notification['id'] ) && isset( $notifications[ $notification['id'] ] ) ) ) {
