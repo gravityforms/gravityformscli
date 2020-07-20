@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Gravity Forms CLI
-Plugin URI: http://www.gravityforms.com
+Plugin URI: https://gravityforms.com
 Description: Manage Gravity Forms with the WP CLI.
 Version: 1.2
 Author: Rocketgenius
-Author URI: http://www.gravityforms.com
+Author URI: https://gravityforms.com
 License: GPL-2.0+
 Text Domain: gravityformscli
 Domain Path: /languages
