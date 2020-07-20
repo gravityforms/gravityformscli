@@ -185,6 +185,9 @@ If you have any ideas for improvements please submit your idea at https://www.gr
 
 == ChangeLog ==
 
+= 1.3 =
+- Fixed an error occurring when using the `wp gf form notification create` command.
+
 = 1.2 =
 - Updated Gravity API domain.
 - Updated the ids format of the `wp gf entry list` command to support the page-size and offset args. Credit: Ulrich Pogson.
