@@ -125,13 +125,13 @@ class GF_CLI_Form_Notification extends WP_CLI_Command {
 	 * [<name>]
 	 * : The name of the notification.
 	 *
-	 * <--to=<to>->
+	 * [--to=<to>]
 	 * : The to field. Default: {admin_email}
 	 *
-	 * <--subject=<subject>>
+	 * [--subject=<subject>]
 	 * : The subject field. Default: New submission from {form_title}
 	 *
-	 * <--message=<message>>
+	 * [--message=<message>]
 	 * : The message body. Default: {all_fields}
 	 *
 	 * [--to-type=<to-type>]
@@ -151,7 +151,7 @@ class GF_CLI_Form_Notification extends WP_CLI_Command {
 	 *     wp gf form notification create 1 "My Notification"
 	 *     wp gf form notification create 1 "My Notification" --to="admin@mysite.com"
 	 *
-	 * @synopsis [<title>] [<description>] [--form-json=<form-json>] [--porcelain]
+	 * @synopsis <form-id> [<name>] [--to=<to>] [--subject=<subject>] [--message=<message>] [--to-type=<to-type>] [--event=<event>] [--notification-json=<notification-json>] [--porcelain]
 	 */
 	function create( $args, $assoc_args ) {
 
@@ -172,7 +172,7 @@ class GF_CLI_Form_Notification extends WP_CLI_Command {
 			$notification = json_decode( $notification_json, ARRAY_A );
 			// Check if the name had been set and override the JSON setting
 			if ( isset( $args[1] ) ) {
-				$notification['name'] = $args[0];
+				$notification['name'] = $args[1];
 			}
 
 			if ( ! isset( $notification['id'] ) || ( isset( $notification['id'] ) && isset( $notifications[ $notification['id'] ] ) ) ) {
