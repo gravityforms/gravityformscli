@@ -104,9 +104,13 @@ class GF_CLI_Root extends WP_CLI_Command {
 
 		$key = md5( $key );
 
-		$plugin_info = $this->get_plugin_info( $slug, $key );
-
 		$version = isset( $assoc_args['version'] ) ? $assoc_args['version'] : 'hotfix';
+
+		if ( $version === 'beta' ) {
+			$slug .= '-beta';
+		}
+
+		$plugin_info = $this->get_plugin_info( $slug, $key );
 
 		if ( $version == 'hotfix' ) {
 			$download_url = isset( $plugin_info['download_url_latest'] ) ? $plugin_info['download_url_latest'] : '';
@@ -151,6 +155,8 @@ class GF_CLI_Root extends WP_CLI_Command {
 
 			WP_CLI::runcommand( $command, $options );
 
+		} elseif ( $version === 'beta' ) {
+			WP_CLI::error( 'There is no beta release available at this time.' );
 		} else {
 			WP_CLI::error( 'There was a problem retrieving the download URL, please check the key.' );
 		}
