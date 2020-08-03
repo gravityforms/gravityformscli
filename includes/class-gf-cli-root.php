@@ -29,7 +29,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 	 *     wp gf version gravityformspolls
 	 */
 	public function version( $args, $assoc_args ) {
-		$slug = isset( $args[0] ) ? $args[0] : 'gravityforms';
+		$slug = $this->get_slug( $args );
 
 		if ( $slug == 'gravityforms' ) {
 			if ( class_exists( 'GFForms' ) ) {
@@ -92,9 +92,8 @@ class GF_CLI_Root extends WP_CLI_Command {
 	 * @synopsis [<slug>] [--key=<key>] [--version=<version>] [--force] [--activate] [--activate-network]
 	 */
 	public function install( $args, $assoc_args ) {
-		$slug = isset( $args[0] ) ? $args[0] : 'gravityforms';
-
-		$key = isset( $assoc_args['key'] ) ? $assoc_args['key'] : $key = $this->get_key();
+		$slug = $this->get_slug( $args, true );
+		$key  = isset( $assoc_args['key'] ) ? $assoc_args['key'] : $key = $this->get_key();
 
 		if ( empty( $key ) ) {
 			WP_CLI::error( 'A valid license key must be specified either in the GF_LICENSE_KEY constant or the --key option.' );
@@ -186,9 +185,8 @@ class GF_CLI_Root extends WP_CLI_Command {
 			WP_CLI::error( 'Gravity Forms is not active.' );
 		}
 
-		$slug = isset( $args[0] ) ? $args[0] : 'gravityforms';
-
-		$key = isset( $assoc_args['key'] ) ? $assoc_args['key'] : $key = $this->get_key();
+		$slug = $this->get_slug( $args, true );
+		$key  = isset( $assoc_args['key'] ) ? $assoc_args['key'] : $key = $this->get_key();
 
 		if ( empty( $key ) ) {
 			$key = GFCommon::get_key();
@@ -264,7 +262,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 	 */
 	public function setup( $args, $assoc_args ) {
 
-		$slug = isset( $args[0] ) ? $args[0] : 'gravityforms';
+		$slug = $this->get_slug( $args );
 
 		$force = WP_CLI\Utils\get_flag_value( $assoc_args, 'force', false );
 
@@ -319,7 +317,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 	 * @alias check-update
 	 */
 	public function check_update( $args, $assoc_args ) {
-		$slug = isset( $args[0] ) ? $args[0] : 'gravityforms';
+		$slug = $this->get_slug( $args );
 
 		$plugin_info = $this->get_plugin_info( $slug );
 
@@ -412,6 +410,31 @@ class GF_CLI_Root extends WP_CLI_Command {
 		}
 
 		return $beta_info;
+	}
+
+	/**
+	 * Gets the plugin slug for the current command.
+	 *
+	 * @since 1.4
+	 *
+	 * @param array $args       The command arguments.
+	 * @param false $beta_check Should we check for the -beta suffix and display an error if found?
+	 *
+	 * @return string
+	 * @throws \WP_CLI\ExitException
+	 */
+	private function get_slug( $args, $beta_check = false ) {
+		if ( empty( $args[0] ) ) {
+			return 'gravityforms';
+		}
+
+		$slug = $args[0];
+
+		if ( $beta_check && strpos( $slug, '-beta' ) ) {
+			WP_CLI::error( 'Appending -beta to the slug is not supported. Use --version=beta instead.' );
+		}
+
+		return $slug;
 	}
 
 }
