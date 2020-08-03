@@ -71,7 +71,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 	 * : The license key if not already available in the GF_LICENSE_KEY constant.
 	 *
 	 * [--version=<version>]
-	 * : The version to be installed. Accepted values: auto-update, hotfix. Default: hotfix.
+	 * : The version to be installed. Accepted values: auto-update, hotfix, or beta. Default: hotfix.
 	 *
 	 * [--force]
 	 * : If set, the command will overwrite any installed version of the plugin, without prompting for confirmation.
@@ -170,7 +170,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 	 * : The license key if not already available in the GF_LICENSE_KEY constant.
 	 *
 	 * [--version=<version>]
-	 * : The version to be installed. Accepted values: auto-update, hotfix. Default: hotfix.
+	 * : The version to be installed. Accepted values: auto-update, hotfix, or beta. Default: hotfix.
 	 *
 	 *
 	 * ## EXAMPLES
