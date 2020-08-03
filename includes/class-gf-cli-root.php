@@ -193,7 +193,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 			WP_CLI::error( 'Gravity Forms is not active.' );
 		}
 
-		$slug = isset( $args[0] ) ? $args[0] : 'gravityforms';
+		$info_slug = $slug = isset( $args[0] ) ? $args[0] : 'gravityforms';
 
 		$key = isset( $assoc_args['key'] ) ? $assoc_args['key'] : $key = $this->get_key();
 
@@ -208,9 +208,13 @@ class GF_CLI_Root extends WP_CLI_Command {
 			WP_CLI::error( 'A valid license key must be saved in the settings or specified in the GF_LICENSE_KEY constant or the --key option.' );
 		}
 
-		$plugin_info = $this->get_plugin_info( $slug, $key );
-
 		$version = isset( $assoc_args['version'] ) ? $assoc_args['version'] : 'hotfix';
+
+		if ( $version === 'beta' ) {
+			$info_slug .= '-beta';
+		}
+
+		$plugin_info = $this->get_plugin_info( $info_slug, $key );
 
 		if ( $version == 'hotfix' ) {
 			$available_version = isset( $plugin_info['version_latest'] ) ? $plugin_info['version_latest'] : '';
@@ -243,6 +247,8 @@ class GF_CLI_Root extends WP_CLI_Command {
 
 			WP_CLI::runcommand( $setup_command, $options );
 
+		} elseif ( $version === 'beta' ) {
+			WP_CLI::error( 'There is no beta release available at this time.' );
 		} else {
 			WP_CLI::error( 'There was a problem retrieving the download URL, please check the key.' );
 		}
