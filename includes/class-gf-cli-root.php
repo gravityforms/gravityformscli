@@ -51,7 +51,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 			}
 
 			if ( ! $addon_found ) {
-				WP_CLI::error( 'Invalid pluging slug: ' . $slug );
+				WP_CLI::error( 'Invalid plugin slug: ' . $slug );
 			}
 		}
 	}
