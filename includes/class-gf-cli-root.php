@@ -29,7 +29,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 	 *     wp gf version gravityformspolls
 	 */
 	public function version( $args, $assoc_args ) {
-		$slug = isset( $args[0] ) ? $args[0] : 'gravityforms';
+		$slug = $this->get_slug( $args );
 
 		if ( $slug == 'gravityforms' ) {
 			if ( class_exists( 'GFForms' ) ) {
@@ -51,7 +51,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 			}
 
 			if ( ! $addon_found ) {
-				WP_CLI::error( 'Invalid pluging slug: ' . $slug );
+				WP_CLI::error( 'Invalid plugin slug: ' . $slug );
 			}
 		}
 	}
@@ -71,7 +71,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 	 * : The license key if not already available in the GF_LICENSE_KEY constant.
 	 *
 	 * [--version=<version>]
-	 * : The version to be installed. Accepted values: auto-update, hotfix. Default: hotfix.
+	 * : The version to be installed. Accepted values: auto-update, hotfix, or beta. Default: hotfix.
 	 *
 	 * [--force]
 	 * : If set, the command will overwrite any installed version of the plugin, without prompting for confirmation.
@@ -92,9 +92,8 @@ class GF_CLI_Root extends WP_CLI_Command {
 	 * @synopsis [<slug>] [--key=<key>] [--version=<version>] [--force] [--activate] [--activate-network]
 	 */
 	public function install( $args, $assoc_args ) {
-		$slug = isset( $args[0] ) ? $args[0] : 'gravityforms';
-
-		$key = isset( $assoc_args['key'] ) ? $assoc_args['key'] : $key = $this->get_key();
+		$slug = $this->get_slug( $args, true );
+		$key  = isset( $assoc_args['key'] ) ? $assoc_args['key'] : $key = $this->get_key();
 
 		if ( empty( $key ) ) {
 			WP_CLI::error( 'A valid license key must be specified either in the GF_LICENSE_KEY constant or the --key option.' );
@@ -104,9 +103,8 @@ class GF_CLI_Root extends WP_CLI_Command {
 
 		$key = md5( $key );
 
-		$plugin_info = $this->get_plugin_info( $slug, $key );
-
-		$version = isset( $assoc_args['version'] ) ? $assoc_args['version'] : 'hotfix';
+		$version     = isset( $assoc_args['version'] ) ? $assoc_args['version'] : 'hotfix';
+		$plugin_info = $version === 'beta' ? $this->get_beta_plugin_info( $slug, $key ) : $this->get_plugin_info( $slug, $key );
 
 		if ( $version == 'hotfix' ) {
 			$download_url = isset( $plugin_info['download_url_latest'] ) ? $plugin_info['download_url_latest'] : '';
@@ -171,7 +169,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 	 * : The license key if not already available in the GF_LICENSE_KEY constant.
 	 *
 	 * [--version=<version>]
-	 * : The version to be installed. Accepted values: auto-update, hotfix. Default: hotfix.
+	 * : The version to be installed. Accepted values: auto-update, hotfix, or beta. Default: hotfix.
 	 *
 	 *
 	 * ## EXAMPLES
@@ -187,9 +185,8 @@ class GF_CLI_Root extends WP_CLI_Command {
 			WP_CLI::error( 'Gravity Forms is not active.' );
 		}
 
-		$slug = isset( $args[0] ) ? $args[0] : 'gravityforms';
-
-		$key = isset( $assoc_args['key'] ) ? $assoc_args['key'] : $key = $this->get_key();
+		$slug = $this->get_slug( $args, true );
+		$key  = isset( $assoc_args['key'] ) ? $assoc_args['key'] : $key = $this->get_key();
 
 		if ( empty( $key ) ) {
 			$key = GFCommon::get_key();
@@ -202,9 +199,8 @@ class GF_CLI_Root extends WP_CLI_Command {
 			WP_CLI::error( 'A valid license key must be saved in the settings or specified in the GF_LICENSE_KEY constant or the --key option.' );
 		}
 
-		$plugin_info = $this->get_plugin_info( $slug, $key );
-
-		$version = isset( $assoc_args['version'] ) ? $assoc_args['version'] : 'hotfix';
+		$version     = isset( $assoc_args['version'] ) ? $assoc_args['version'] : 'hotfix';
+		$plugin_info = $version === 'beta' ? $this->get_beta_plugin_info( $slug, $key ) : $this->get_plugin_info( $slug, $key );
 
 		if ( $version == 'hotfix' ) {
 			$available_version = isset( $plugin_info['version_latest'] ) ? $plugin_info['version_latest'] : '';
@@ -266,7 +262,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 	 */
 	public function setup( $args, $assoc_args ) {
 
-		$slug = isset( $args[0] ) ? $args[0] : 'gravityforms';
+		$slug = $this->get_slug( $args );
 
 		$force = WP_CLI\Utils\get_flag_value( $assoc_args, 'force', false );
 
@@ -321,7 +317,7 @@ class GF_CLI_Root extends WP_CLI_Command {
 	 * @alias check-update
 	 */
 	public function check_update( $args, $assoc_args ) {
-		$slug = isset( $args[0] ) ? $args[0] : 'gravityforms';
+		$slug = $this->get_slug( $args );
 
 		$plugin_info = $this->get_plugin_info( $slug );
 
@@ -381,4 +377,64 @@ class GF_CLI_Root extends WP_CLI_Command {
 		$plugin_info = unserialize( $body );
 		return $plugin_info;
 	}
+
+	/**
+	 * Gets the plugin info for beta releases.
+	 *
+	 * @since 1.4
+	 *
+	 * @param string $slug The plugin or add-on slug.
+	 * @param string $key  The license key.
+	 *
+	 * @return mixed
+	 * @throws \WP_CLI\ExitException
+	 */
+	private function get_beta_plugin_info( $slug, $key = '' ) {
+		if ( $slug !== 'gravityforms' ) {
+			WP_CLI::error( '--version=beta is not currently supported by add-ons.' );
+		}
+
+		$beta_info    = $this->get_plugin_info( $slug . '-beta', $key );
+		$beta_version = isset( $beta_info['version'] ) ? $beta_info['version'] : '';
+		$no_beta_msg  = 'There is no beta release available at this time.';
+
+		if ( empty( $beta_version ) ) {
+			WP_CLI::error( $no_beta_msg );
+		}
+
+		$stable_info    = $this->get_plugin_info( $slug, $key );
+		$stable_version = isset( $stable_info['version'] ) ? $stable_info['version'] : '';
+
+		if ( $stable_version && version_compare( $stable_version, $beta_version, '>=' ) ) {
+			WP_CLI::error( $no_beta_msg );
+		}
+
+		return $beta_info;
+	}
+
+	/**
+	 * Gets the plugin slug for the current command.
+	 *
+	 * @since 1.4
+	 *
+	 * @param array $args       The command arguments.
+	 * @param false $beta_check Should we check for the -beta suffix and display an error if found?
+	 *
+	 * @return string
+	 * @throws \WP_CLI\ExitException
+	 */
+	private function get_slug( $args, $beta_check = false ) {
+		if ( empty( $args[0] ) ) {
+			return 'gravityforms';
+		}
+
+		$slug = $args[0];
+
+		if ( $beta_check && strpos( $slug, '-beta' ) ) {
+			WP_CLI::error( 'Appending -beta to the slug is not supported. Use --version=beta instead.' );
+		}
+
+		return $slug;
+	}
+
 }

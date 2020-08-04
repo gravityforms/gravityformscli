@@ -185,6 +185,9 @@ If you have any ideas for improvements please submit your idea at https://www.gr
 
 == ChangeLog ==
 
+= 1.3.1 =
+- Added support for using `--version=beta` with the `wp gf install` and `wp gf update` commands. Add-On beta releases are not currently supported.
+
 = 1.3 =
 - Fixed an error occurring when using the `wp gf form notification create` command.
 
