@@ -29,14 +29,14 @@ class GF_CLI_Root extends WP_CLI_Command {
 	 *     wp gf version gravityformspolls
 	 */
 	public function version( $args, $assoc_args ) {
+		if ( ! class_exists( 'GFForms' ) ) {
+			WP_CLI::error( 'Gravity Forms is not installed. Use the wp gf install command.' );
+		}
+
 		$slug = $this->get_slug( $args );
 
 		if ( $slug == 'gravityforms' ) {
-			if ( class_exists( 'GFForms' ) ) {
-				WP_CLI::log( GFForms::$version );
-			} else {
-				WP_CLI::error( 'Gravity Forms is not installed. Use the wp gf install command.' );
-			}
+			WP_CLI::log( GFForms::$version );
 		} else {
 			$addon_class_names = GFAddOn::get_registered_addons();
 			$addon_found = false;
