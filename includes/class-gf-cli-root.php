@@ -38,21 +38,8 @@ class GF_CLI_Root extends WP_CLI_Command {
 		if ( $slug == 'gravityforms' ) {
 			WP_CLI::log( GFForms::$version );
 		} else {
-			$addon_class_names = GFAddOn::get_registered_addons();
-			$addon_found = false;
-			foreach ( $addon_class_names as $addon_class_name ) {
-				/* @var GFAddon $addon */
-				$addon = call_user_func( array( $addon_class_name, 'get_instance' ) );
-				if ( $addon->get_slug() == $slug ) {
-					WP_CLI::log( $addon->get_version() );
-					$addon_found = true;
-					break;
-				}
-			}
-
-			if ( ! $addon_found ) {
-				WP_CLI::error( 'Invalid plugin slug: ' . $slug );
-			}
+			$addon = $this->get_addon( $slug );
+			WP_CLI::log( $addon->get_version() );
 		}
 	}
 
@@ -282,15 +269,9 @@ class GF_CLI_Root extends WP_CLI_Command {
 				}
 			}
 		} else {
-			$addon_class_names = GFAddOn::get_registered_addons();
-			foreach ( $addon_class_names as $addon_class_name ) {
-				$addon = call_user_func( array( $addon_class_name, 'get_instance' ) );
-				if ( $addon->get_slug() == $slug ) {
-					$addon->setup();
-					WP_CLI::success( 'setup ' . $slug );
-					break;
-				}
-			}
+			$addon = $this->get_addon( $slug );
+			$addon->setup();
+			WP_CLI::success( 'setup ' . $slug );
 		}
 	}
 
@@ -435,6 +416,31 @@ class GF_CLI_Root extends WP_CLI_Command {
 		}
 
 		return $slug;
+	}
+
+	/**
+	 * Returns the add-on instance for the given slug.
+	 *
+	 * @since 1.4
+	 *
+	 * @param string $slug The add-on slug.
+	 *
+	 * @return GFAddon
+	 * @throws \WP_CLI\ExitException
+	 */
+	private function get_addon( $slug ) {
+		$addon_class_names = GFAddOn::get_registered_addons();
+
+		foreach ( $addon_class_names as $addon_class_name ) {
+			/* @var GFAddon $addon */
+			$addon = call_user_func( array( $addon_class_name, 'get_instance' ) );
+			if ( $addon->get_slug() == $slug ) {
+
+				return $addon;
+			}
+		}
+
+		WP_CLI::error( 'Invalid slug or plugin not active: ' . $slug );
 	}
 
 }
