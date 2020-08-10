@@ -186,23 +186,31 @@ class GF_CLI_Root extends WP_CLI_Command {
 			WP_CLI::error( 'A valid license key must be saved in the settings or specified in the GF_LICENSE_KEY constant or the --key option.' );
 		}
 
+		if ( $slug === 'gravityforms' ) {
+			$current_version = GFForms::$version;
+		} else {
+			$addon           = $this->get_addon( $slug );
+			$current_version = $addon->get_version();
+		}
+
 		$version     = isset( $assoc_args['version'] ) ? $assoc_args['version'] : 'hotfix';
 		$plugin_info = $version === 'beta' ? $this->get_beta_plugin_info( $slug, $key ) : $this->get_plugin_info( $slug, $key );
 
 		if ( $version == 'hotfix' ) {
 			$available_version = isset( $plugin_info['version_latest'] ) ? $plugin_info['version_latest'] : '';
-			$download_url = isset( $plugin_info['download_url_latest'] ) ? $plugin_info['download_url_latest'] : '';
+			$download_url      = isset( $plugin_info['download_url_latest'] ) ? $plugin_info['download_url_latest'] : '';
 		} else {
 			$available_version = isset( $plugin_info['version'] ) ? $plugin_info['version'] : '';
-			$download_url = isset( $plugin_info['download_url'] ) ? $plugin_info['download_url'] : '';
-		}
-
-		if ( version_compare( GFForms::$version, $available_version, '>=' ) ) {
-			WP_CLI::success( 'Plugin already updated' );
-			return;
+			$download_url      = isset( $plugin_info['download_url'] ) ? $plugin_info['download_url'] : '';
 		}
 
 		if ( $plugin_info && ! empty( $download_url ) ) {
+
+			if ( version_compare( $current_version, $available_version, '>=' ) ) {
+				WP_CLI::success( 'Plugin already updated' );
+
+				return;
+			}
 
 			$download_url .= '&key=' . $key;
 
