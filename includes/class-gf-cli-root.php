@@ -38,21 +38,8 @@ class GF_CLI_Root extends WP_CLI_Command {
 		if ( $slug == 'gravityforms' ) {
 			WP_CLI::log( GFForms::$version );
 		} else {
-			$addon_class_names = GFAddOn::get_registered_addons();
-			$addon_found = false;
-			foreach ( $addon_class_names as $addon_class_name ) {
-				/* @var GFAddon $addon */
-				$addon = call_user_func( array( $addon_class_name, 'get_instance' ) );
-				if ( $addon->get_slug() == $slug ) {
-					WP_CLI::log( $addon->get_version() );
-					$addon_found = true;
-					break;
-				}
-			}
-
-			if ( ! $addon_found ) {
-				WP_CLI::error( 'Invalid plugin slug: ' . $slug );
-			}
+			$addon = $this->get_addon( $slug );
+			WP_CLI::log( $addon->get_version() );
 		}
 	}
 
@@ -199,23 +186,31 @@ class GF_CLI_Root extends WP_CLI_Command {
 			WP_CLI::error( 'A valid license key must be saved in the settings or specified in the GF_LICENSE_KEY constant or the --key option.' );
 		}
 
+		if ( $slug === 'gravityforms' ) {
+			$current_version = GFForms::$version;
+		} else {
+			$addon           = $this->get_addon( $slug );
+			$current_version = $addon->get_version();
+		}
+
 		$version     = isset( $assoc_args['version'] ) ? $assoc_args['version'] : 'hotfix';
 		$plugin_info = $version === 'beta' ? $this->get_beta_plugin_info( $slug, $key ) : $this->get_plugin_info( $slug, $key );
 
 		if ( $version == 'hotfix' ) {
 			$available_version = isset( $plugin_info['version_latest'] ) ? $plugin_info['version_latest'] : '';
-			$download_url = isset( $plugin_info['download_url_latest'] ) ? $plugin_info['download_url_latest'] : '';
+			$download_url      = isset( $plugin_info['download_url_latest'] ) ? $plugin_info['download_url_latest'] : '';
 		} else {
 			$available_version = isset( $plugin_info['version'] ) ? $plugin_info['version'] : '';
-			$download_url = isset( $plugin_info['download_url'] ) ? $plugin_info['download_url'] : '';
-		}
-
-		if ( version_compare( GFForms::$version, $available_version, '>=' ) ) {
-			WP_CLI::success( 'Plugin already updated' );
-			return;
+			$download_url      = isset( $plugin_info['download_url'] ) ? $plugin_info['download_url'] : '';
 		}
 
 		if ( $plugin_info && ! empty( $download_url ) ) {
+
+			if ( version_compare( $current_version, $available_version, '>=' ) ) {
+				WP_CLI::success( 'Plugin already updated' );
+
+				return;
+			}
 
 			$download_url .= '&key=' . $key;
 
@@ -282,15 +277,9 @@ class GF_CLI_Root extends WP_CLI_Command {
 				}
 			}
 		} else {
-			$addon_class_names = GFAddOn::get_registered_addons();
-			foreach ( $addon_class_names as $addon_class_name ) {
-				$addon = call_user_func( array( $addon_class_name, 'get_instance' ) );
-				if ( $addon->get_slug() == $slug ) {
-					$addon->setup();
-					WP_CLI::success( 'setup ' . $slug );
-					break;
-				}
-			}
+			$addon = $this->get_addon( $slug );
+			$addon->setup();
+			WP_CLI::success( 'setup ' . $slug );
 		}
 	}
 
@@ -435,6 +424,31 @@ class GF_CLI_Root extends WP_CLI_Command {
 		}
 
 		return $slug;
+	}
+
+	/**
+	 * Returns the add-on instance for the given slug.
+	 *
+	 * @since 1.4
+	 *
+	 * @param string $slug The add-on slug.
+	 *
+	 * @return GFAddon
+	 * @throws \WP_CLI\ExitException
+	 */
+	private function get_addon( $slug ) {
+		$addon_class_names = GFAddOn::get_registered_addons();
+
+		foreach ( $addon_class_names as $addon_class_name ) {
+			/* @var GFAddon $addon */
+			$addon = call_user_func( array( $addon_class_name, 'get_instance' ) );
+			if ( $addon->get_slug() == $slug ) {
+
+				return $addon;
+			}
+		}
+
+		WP_CLI::error( 'Invalid slug or plugin not active: ' . $slug );
 	}
 
 }
