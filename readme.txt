@@ -2,7 +2,7 @@
 Contributors: rocketgenius, stevehenty
 Tags: gravity forms
 Requires at least: 4.2
-Tested up to: 5.4.2
+Tested up to: 5.5.1
 Stable tag: 1.3
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -185,10 +185,8 @@ If you have any ideas for improvements please submit your idea at https://www.gr
 
 == ChangeLog ==
 
-= 1.3.2 =
+= 1.4 =
 - Fixed an issue where the version comparison performed when using `wp gf update` with an add-on slug uses the Gravity Forms version number.
-
-= 1.3.1 =
 - Added support for using `--version=beta` with the `wp gf install` and `wp gf update` commands. Add-On beta releases are not currently supported.
 - Fixed a fatal error which can occur when using the `wp gf version` command with an add-on slug when Gravity Forms is not active or not installed.
 
