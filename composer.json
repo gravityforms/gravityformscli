@@ -1,7 +1,7 @@
 {
   "name": "gravityforms/gravityformscli",
   "description": "A set of WP-CLI commands to manage Gravity Forms.",
-  "type": "wp-cli-package",
+  "type": "wordpress-plugin",
   "homepage": "https://github.com/gravityforms/gravityformscli",
   "support": {
     "issues": "https://gravityforms.com"
