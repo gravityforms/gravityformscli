@@ -27,7 +27,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses.
 */
 
-defined( 'ABSPATH' ) || die();
+defined( 'ABSPATH' ) || defined( 'WP_CLI' ) || die();
 
 // Defines the current version of the CLI add-on
 define( 'GF_CLI_VERSION', '1.4' );

@@ -1,6 +1,6 @@
 <?php
 
-defined( 'ABSPATH' ) || die();
+defined( 'ABSPATH' ) || defined( 'WP_CLI' ) || die();
 
 /**
  * Manage Gravity Forms Notifications.
