@@ -69,7 +69,7 @@ class GF_CLI_Bootstrap {
 		if ( defined( 'WP_CLI' ) && WP_CLI ) {
 
 			// Checks for files within the includes directory, and includes them.
-			foreach ( glob( plugin_dir_path( __FILE__ ) . 'includes/*.php' ) as $filename ) {
+			foreach ( glob( dirname( __FILE__ ) . '/includes/*.php' ) as $filename ) {
 				require_once( $filename );
 			}
 			$command_args = array( 'before_invoke' => array( 'GF_CLI_Bootstrap', 'before_invoke' ) );
