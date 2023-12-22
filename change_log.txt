@@ -1,3 +1,6 @@
+= 1.5 =
+- Updated the plugin to allow its usage as a WP-CLI package.
+
 = 1.4 =
 - Fixed an issue where the version comparison performed when using `wp gf update` with an add-on slug uses the Gravity Forms version number.
 - Added support for using `--version=beta` with the `wp gf install` and `wp gf update` commands. Add-On beta releases are not currently supported.
