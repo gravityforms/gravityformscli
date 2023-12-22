@@ -34,8 +34,6 @@ define( 'GF_CLI_VERSION', '1.4' );
 
 define( 'GF_CLI_MIN_GF_VERSION', '1.9.17.8' );
 
-add_action( 'init', array( 'GF_CLI_Bootstrap', 'load_cli' ), 1 );
-
 // After GF is loaded, load the CLI add-on
 defined( 'ABSPATH' ) && add_action( 'gform_loaded', array( 'GF_CLI_Bootstrap', 'load_addon' ), 1 );
 
@@ -100,6 +98,8 @@ class GF_CLI_Bootstrap {
 		}
 	}
 }
+
+GF_CLI_Bootstrap::load_cli();
 
 /**
  * Returns an instance of the GF_CLI class
