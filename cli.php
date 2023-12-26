@@ -3,7 +3,7 @@
 Plugin Name: Gravity Forms CLI
 Plugin URI: https://gravityforms.com
 Description: Manage Gravity Forms with the WP CLI.
-Version: 1.4
+Version: 1.5
 Author: Rocketgenius
 Author URI: https://gravityforms.com
 License: GPL-2.0+
@@ -27,17 +27,15 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses.
 */
 
-defined( 'ABSPATH' ) || die();
+defined( 'ABSPATH' ) || defined( 'WP_CLI' ) || die();
 
 // Defines the current version of the CLI add-on
-define( 'GF_CLI_VERSION', '1.4' );
+define( 'GF_CLI_VERSION', '1.5' );
 
 define( 'GF_CLI_MIN_GF_VERSION', '1.9.17.8' );
 
-add_action( 'init', array( 'GF_CLI_Bootstrap', 'load_cli' ), 1 );
-
 // After GF is loaded, load the CLI add-on
-add_action( 'gform_loaded', array( 'GF_CLI_Bootstrap', 'load_addon' ), 1 );
+defined( 'ABSPATH' ) && add_action( 'gform_loaded', array( 'GF_CLI_Bootstrap', 'load_addon' ), 1 );
 
 
 
@@ -71,7 +69,7 @@ class GF_CLI_Bootstrap {
 		if ( defined( 'WP_CLI' ) && WP_CLI ) {
 
 			// Checks for files within the includes directory, and includes them.
-			foreach ( glob( plugin_dir_path( __FILE__ ) . 'includes/*.php' ) as $filename ) {
+			foreach ( glob( dirname( __FILE__ ) . '/includes/*.php' ) as $filename ) {
 				require_once( $filename );
 			}
 			$command_args = array( 'before_invoke' => array( 'GF_CLI_Bootstrap', 'before_invoke' ) );
@@ -100,6 +98,8 @@ class GF_CLI_Bootstrap {
 		}
 	}
 }
+
+GF_CLI_Bootstrap::load_cli();
 
 /**
  * Returns an instance of the GF_CLI class

@@ -1,6 +1,6 @@
 <?php
 
-defined( 'ABSPATH' ) || die();
+defined( 'ABSPATH' ) || defined( 'WP_CLI' ) || die();
 
 // Include the Gravity Forms add-on framework
 GFForms::include_addon_framework();
