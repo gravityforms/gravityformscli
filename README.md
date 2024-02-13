@@ -5,11 +5,6 @@ The Gravity Forms CLI Add-On allows WP-CLI users to manage installation, forms a
 
 [Documentation](https://docs.gravityforms.com/category/add-ons-gravity-forms/wp-cli-add-on/)
 
-Video demos:
-
-[Form Management](https://www.youtube.com/watch?v=LO3fLW6SWk0])
-
-[Entry Management](https://www.youtube.com/watch?v=KRI2NIsf75U)
 
 Getting started
 ---------------

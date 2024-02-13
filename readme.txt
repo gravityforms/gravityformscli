@@ -15,12 +15,6 @@ The Gravity Forms CLI Add-On allows WP-CLI users to manage forms and entries and
 
 [Documentation](https://docs.gravityforms.com/category/add-ons-gravity-forms/wp-cli-add-on/)
 
-Form Management
-[youtube https://www.youtube.com/watch?v=LO3fLW6SWk0]
-
-Entry Management
-[youtube https://www.youtube.com/watch?v=KRI2NIsf75U]
-
 = Getting started =
 
 *   `wp help gf`
