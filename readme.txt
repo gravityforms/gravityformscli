@@ -3,7 +3,7 @@ Contributors: rocketgenius, stevehenty
 Tags: gravity forms
 Requires at least: 4.2
 Tested up to: 6.4
-Stable tag: 1.4
+Stable tag: 1.5
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -177,13 +177,21 @@ If you have any ideas for improvements please submit your idea at https://www.gr
 
 == Installation ==
 
-`wp plugin install gravityformscli --activate` or
+`wp plugin install gravityformscli --activate`
+
+or
+
+`wp package install https://github.com/gravityforms/gravityformscli.git`
+
+or
 
 1.  Download the zipped file.
 1.  Extract and upload the contents of the folder to /wp-contents/plugins/ folder
 1.  Go to the Plugin management page of WordPress admin section and enable the 'Gravity Forms CLI' plugin
 
 == ChangeLog ==
+= 1.5 =
+- Updated the plugin to allow its usage as a WP-CLI package.
 
 = 1.4 =
 - Fixed an issue where the version comparison performed when using `wp gf update` with an add-on slug uses the Gravity Forms version number.
