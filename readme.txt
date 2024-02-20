@@ -1,5 +1,5 @@
 === Gravity Forms CLI Add-On ===
-Contributors: rocketgenius, stevehenty
+Contributors: rocketgenius
 Tags: gravity forms
 Requires at least: 4.2
 Tested up to: 6.4
