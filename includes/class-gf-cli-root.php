@@ -37,6 +37,8 @@ class GF_CLI_Root extends WP_CLI_Command {
 
 		if ( $slug == 'gravityforms' ) {
 			WP_CLI::log( GFForms::$version );
+		} elseif ( $slug === 'gravitysmtp' ) {
+			$current_version = defined( 'GF_GRAVITY_SMTP_VERSION' ) ? GF_GRAVITY_SMTP_VERSION : null;
 		} else {
 			$addon = $this->get_addon( $slug );
 			WP_CLI::log( $addon->get_version() );
@@ -188,6 +190,8 @@ class GF_CLI_Root extends WP_CLI_Command {
 
 		if ( $slug === 'gravityforms' ) {
 			$current_version = GFForms::$version;
+		} elseif ( $slug === 'gravitysmtp' ) {
+			$current_version = defined( 'GF_GRAVITY_SMTP_VERSION' ) ? GF_GRAVITY_SMTP_VERSION : null;
 		} else {
 			$addon           = $this->get_addon( $slug );
 			$current_version = $addon->get_version();
@@ -276,6 +280,8 @@ class GF_CLI_Root extends WP_CLI_Command {
 					WP_CLI::error( 'Use the --force flag to force the database setup.' );
 				}
 			}
+		} elseif ( $slug ==='gravitysmtp' ) {
+			WP_CLI::success( 'setup gravitysmtp' );
 		} else {
 			$addon = $this->get_addon( $slug );
 			$addon->setup();
