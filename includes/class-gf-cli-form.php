@@ -511,7 +511,7 @@ class GF_CLI_Form extends WP_CLI_Command {
 	 */
 	function update( $args, $assoc_args ) {
 
-		$form_id = $args[0];
+		$form_id = intval( $args[0] );
 
 		if ( isset( $assoc_args['form-json'] ) ) {
 			$json_config = $assoc_args['form-json'];
