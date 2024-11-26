@@ -2,7 +2,7 @@
 Contributors: rocketgenius
 Tags: gravity forms
 Requires at least: 4.2
-Tested up to: 6.4
+Tested up to: 6.7
 Stable tag: 1.5
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
