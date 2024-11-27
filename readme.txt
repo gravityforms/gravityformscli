@@ -2,8 +2,8 @@
 Contributors: rocketgenius
 Tags: gravity forms
 Requires at least: 4.2
-Tested up to: 6.4
-Stable tag: 1.5
+Tested up to: 6.7
+Stable tag: 1.7
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -184,6 +184,12 @@ or
 1.  Go to the Plugin management page of WordPress admin section and enable the 'Gravity Forms CLI' plugin
 
 == ChangeLog ==
+= 1.7 =
+- Fixed a bug that sometimes causes the form ID to be stored as a string.
+
+= 1.6 =
+- Updated the plugin to support installing and updating Gravity SMTP.
+
 = 1.5 =
 - Updated the plugin to allow its usage as a WP-CLI package.
 
