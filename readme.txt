@@ -184,6 +184,9 @@ or
 1.  Go to the Plugin management page of WordPress admin section and enable the 'Gravity Forms CLI' plugin
 
 == ChangeLog ==
+= 1.6 =
+- Updated the plugin to support installing and updating Gravity SMTP.
+
 = 1.5 =
 - Updated the plugin to allow its usage as a WP-CLI package.
 
