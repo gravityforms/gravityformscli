@@ -1,3 +1,6 @@
+= 1.7 =
+- Fixed a bug that sometimes causes the form ID to be stored as a string.
+
 = 1.6 =
 - Updated the plugin to support installing and updating Gravity SMTP.
 
