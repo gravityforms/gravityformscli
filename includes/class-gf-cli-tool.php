@@ -82,16 +82,20 @@ class GF_CLI_Tool extends WP_CLI_Command {
 
 		$has_errors = false;
 		foreach ( $checksums as $checksum_string ) {
-			$checksum = substr( $checksum_string, 0, 32 );
-			$file     = str_replace( $checksum . '  ', '', $checksum_string );
+			list( $checksum, $file ) = explode( '  ', $checksum_string );
 			$path     = GFCommon::get_base_path() . DIRECTORY_SEPARATOR . $file;
 			if ( ! file_exists( $path ) ) {
 				WP_CLI::warning( "File doesn't exist: {$file}" );
 				$has_errors = true;
 				continue;
 			}
-			$md5_file = md5_file( $path );
-			if ( $md5_file !== $checksum ) {
+			$hashed_file = '';
+			if ( strlen( $checksum ) === 32 ) {
+				$hashed_file = md5_file( $path );
+			} elseif ( strlen( $checksum) === 40 )  {
+				$hashed_file = sha1_file( $path );
+			}
+			if ( $hashed_file !== $checksum ) {
 				WP_CLI::warning( "File doesn't verify against checksum: {$file}" );
 				$has_errors = true;
 			}

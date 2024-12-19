@@ -1,3 +1,6 @@
+= 1.8 =
+- Fixed a bug where the verify checksums command fails even when it should succeed.
+
 = 1.7 =
 - Fixed a bug that sometimes causes the form ID to be stored as a string.
 
