@@ -92,7 +92,7 @@ class GF_CLI_Tool extends WP_CLI_Command {
 			$hashed_file = '';
 			if ( strlen( $checksum ) === 32 ) {
 				$hashed_file = md5_file( $path );
-			} elseif ( strlen( $checksum) === 40 )  {
+			} elseif ( strlen( $checksum ) === 40 )  {
 				$hashed_file = sha1_file( $path );
 			}
 			if ( $hashed_file !== $checksum ) {
