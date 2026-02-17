@@ -2,8 +2,13 @@
 
 defined( 'ABSPATH' ) || defined( 'WP_CLI' ) || die();
 
-// Include the Gravity Forms add-on framework
-GFForms::include_addon_framework();
+// Include the Gravity Forms add-on framework if available.
+// When running as a standalone WP-CLI package, GFForms is not loaded.
+if ( class_exists( 'GFForms' ) ) {
+	GFForms::include_addon_framework();
+}
+
+if ( class_exists( 'GFAddOn' ) ) {
 
 class GF_CLI extends GFAddOn {
 	/**
@@ -99,6 +104,8 @@ class GF_CLI extends GFAddOn {
 	} /* do nothing */
 
 }
+
+} // End class_exists( 'GFAddOn' ) check.
 
 
 
