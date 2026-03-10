@@ -5,6 +5,20 @@ The Gravity Forms CLI Add-On allows WP-CLI users to manage installation, forms a
 
 [Documentation](https://docs.gravityforms.com/category/add-ons-gravity-forms/wp-cli-add-on/)
 
+Installation
+------------
+**As a WP-CLI package:**
+    
+    wp package install gravityforms/gravityformscli
+
+**As a WordPress plugin:**
+    
+    wp plugin install gravityformscli --activate
+
+**Installing from GitHub:**
+    
+    wp package install https://github.com/gravityforms/gravityformscli.git
+
 
 Getting started
 ---------------
