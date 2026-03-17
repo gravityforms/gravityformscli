@@ -8,9 +8,11 @@ if ( class_exists('GFForms' ) ) {
 	GFForms::include_addon_framework();
 }
 
-if ( class_exists( 'GFAddOn' ) ) {
+if ( ! class_exists( 'GFAddOn' ) ) {
+	return;
+}
 
-	class GF_CLI extends GFAddOn {
+class GF_CLI extends GFAddOn {
 		/**
 		 * Contains an instance of this class, if available.
 		 *
@@ -103,7 +105,6 @@ if ( class_exists( 'GFAddOn' ) ) {
 		private function __clone() {
 		} /* do nothing */
 
-	}
 }
 
 
