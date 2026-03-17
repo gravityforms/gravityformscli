@@ -23,19 +23,22 @@
   "require": {
     "php": ">=5.6",
     "wp-cli/wp-cli": "^2.5"
-
   },
   "autoload": {
     "files": [ "cli.php" ]
   },
-    "extra": {
-        "commands": [
-          "gf",
-          "gf form",
-          "gf field",
-          "gf entry",
-          "gf license",
-          "gf tool"
-        ]
-    }
+  "extra": {
+    "commands": [
+      "gf",
+      "gf form",
+      "gf form notification",
+      "gf form field",
+      "gf notification",
+      "gf field",
+      "gf entry",
+      "gf entry notification",
+      "gf license",
+      "gf tool"
+    ]
+  }
 }
