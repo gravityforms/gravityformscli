@@ -172,7 +172,7 @@ Requirements
 
 1. Wordpress 4.2+
 2. Gravity Forms > 1.9.17.8
-3. WP-CLI v1.0+
+3. WP-CLI v2.5+
 
 
 Support
