@@ -112,7 +112,7 @@ GF_CLI_Bootstrap::load_cli();
  * @return object|null An instance of the GF_CLI class, or null if not available.
  */
 function gf_cli() {
-	if (class_exists( 'GF_CLI' ) ) {
+	if ( class_exists( 'GF_CLI' ) ) {
 		return GF_CLI::get_instance();
 	}
 
