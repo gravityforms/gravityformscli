@@ -184,6 +184,12 @@ or
 1.  Go to the Plugin management page of WordPress admin section and enable the 'Gravity Forms CLI' plugin
 
 == ChangeLog ==
+= 1.9 =
+- Updated the plugin to support installing packages through Packagist.
+
+= 1.8 =
+- Fixed a bug where the verify checksums command fails even when it should succeed.
+
 = 1.7 =
 - Fixed a bug that sometimes causes the form ID to be stored as a string.
 
