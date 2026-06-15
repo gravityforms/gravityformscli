@@ -96,6 +96,10 @@ class GF_CLI_Entry extends WP_CLI_Command {
 					$value = $this->get_entry_value( $entry, $field_id, $form );
 				}
 
+				if ( is_array( $value ) ) {
+					$value = json_encode( $value );
+				}
+
 				// Add the data gathered to the $rows array.
 				$rows[] = array( 'ID' => $field_id, 'Field' => $label, 'Value' => (string) $value );
 			}
