@@ -57,3 +57,5 @@ assets/**/dist/**
 reports/**
 local-config.json
 .env
+/checksums
+/languages
