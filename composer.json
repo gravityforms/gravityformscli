@@ -24,8 +24,20 @@
     "php": ">=5.6",
     "wp-cli/wp-cli": "^2.5"
   },
-  "autoload": {
-    "files": [ "cli.php" ]
+  "repositories": [
+    {
+        "type": "vcs",
+        "url": "git@github.com:gravityforms/rgcodestandards.git"
+    }
+  ],
+  "require-dev": {
+    "php": "^8.0",
+		"lucatume/function-mocker": "^2.0",
+		"phpstan/extension-installer": "^1.4",
+		"phpunit/phpunit": "^9",
+		"szepeviktor/phpstan-wordpress": "^1.3",
+		"yoast/phpunit-polyfills": "^4.0",
+    "gravityforms/rgcodestandards": "dev-master"
   },
   "extra": {
     "commands": [
@@ -40,5 +52,21 @@
       "gf license",
       "gf tool"
     ]
+  },
+  "scripts": {
+		"phpunit": "vendor/bin/phpunit --log-junit tests/logs/junit.xml --no-coverage",
+		"phpcs": "phpcs .",
+		"phpstan": "phpstan analyze . --memory-limit=-1"
+	},
+  "scripts-descriptions": {
+    "phpunit": "Run PHPUnit tests",
+    "phpcs": "Run PHPCS on the project.",
+    "phpstan": "Run PHPStan Static Analysis on the project."
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "phpstan/extension-installer": true
+    }
   }
 }

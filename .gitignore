@@ -1,1 +1,59 @@
-.svn/
+# OS generated files #
+######################
+.DS_Store*
+ehthumbs.db
+._*
+*~
+.svn
+.cvs
+*.bak
+*.swp
+Thumbs.db
+.DS_Store
+.idea
+.phpstorm.meta.php
+
+# Vim generated files #
+#######################
+
+*.un~
+
+# Packages #
+############
+
+*.7z
+*.dmg
+*.gz
+*.bz2
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.tgz
+
+# Logs and databases #
+######################
+
+*.log
+*.sql
+
+**/node_modules/
+
+# DevOps #
+##########
+
+/.env
+/vendor
+/.gitmodules
+/.vscode
+/dist
+/.phpstan-cache/
+
+# Project Ignores #
+###################
+
+assets/**/dist/**
+reports/**
+local-config.json
+.env
