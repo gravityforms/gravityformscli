@@ -2,8 +2,8 @@
 Contributors: rocketgenius
 Tags: gravity forms
 Requires at least: 4.2
-Tested up to: 6.7
-Stable tag: 1.9
+Tested up to: 7.1
+Stable tag: 1.9.1
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -184,6 +184,11 @@ or
 1.  Go to the Plugin management page of WordPress admin section and enable the 'Gravity Forms CLI' plugin
 
 == ChangeLog ==
+
+- 1.9.1 =
+- Fixed an issue with the `wp gf install` command not properly handling certain edge cases.
+- Updated the supported WordPress version to 7.1.
+
 = 1.9 =
 - Updated the plugin to support installing packages through Packagist.
 

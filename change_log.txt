@@ -1,6 +1,9 @@
+= 1.9.1 =
+- Fixed an issue with the `wp gf install` command not properly handling certain edge cases.
+- Updated the supported WordPress version to 7.1.
+
 = 1.9 =
 - Updated the plugin to support installing packages through Packagist.
-- Fixed and issue where the value of fields stored as arrays is type casted to a string when displaying an entry in the terminal.
 
 = 1.8 =
 - Fixed a bug where the verify checksums command fails even when it should succeed.

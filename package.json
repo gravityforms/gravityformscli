@@ -1,7 +1,7 @@
 {
   "name": "gravityformscli",
   "description": "Gravity Forms CLI Add-on",
-  "version": "1.3.0",
+  "version": "1.9.1",
   "license": "GPL-2.0",
   "repository": "https://github.com/gravityforms/gravityformscli",
   "engines": {
