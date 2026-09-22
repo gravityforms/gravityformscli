@@ -1,8 +1,8 @@
 # Directories
-/.wordpress-org/** export-ignore
-/.github/** export-ignore
-/node_modules/** export-ignore
-/vendor/** export-ignore
+/.wordpress-org export-ignore
+/.github export-ignore
+/node_modules export-ignore
+/vendor export-ignore
 
 # Files
 /.gitattributes export-ignore
