@@ -1,0 +1,21 @@
+{
+  "name": "gravityformscli",
+  "description": "Gravity Forms CLI Add-on",
+  "version": "1.9.1",
+  "license": "GPL-2.0",
+  "repository": "https://github.com/gravityforms/gravityformscli",
+  "engines": {
+    "node": "24.11.1",
+    "npm": "11.6.2"
+  },
+  "scripts": {
+    "release": "cd node_modules/@gravityforms/gulp-tasks && cross-env PROJECT_DIR='$OLDPWD' npm run gulp -- release",
+    "package": "cd node_modules/@gravityforms/gulp-tasks && cross-env PROJECT_DIR='$OLDPWD' npm run gulp -- package",
+    "publish": "cd node_modules/@gravityforms/gulp-tasks && cross-env PROJECT_DIR='$OLDPWD' npm run gulp -- publish"
+  },
+  "dependencies": {
+    "@gravityforms/gulp-tasks": "9.1.3",
+    "@gravityforms/node-utils": "4.0.0",
+    "cross-env": "7.0.3"
+  }
+}
