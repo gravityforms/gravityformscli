@@ -186,7 +186,7 @@ or
 == ChangeLog ==
 
 - 1.9.1 =
-- Fixed and issue where the value of fields stored as arrays is type casted to a string when displaying an entry in the terminal.
+- Fixed an issue where the value of fields stored as arrays is type casted to a string when displaying an entry in the terminal.
 - Updated the supported WordPress version to 7.1.
 
 = 1.9 =
